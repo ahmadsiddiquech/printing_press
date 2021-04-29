@@ -1,24 +1,27 @@
 <div class="container section-gap">
     <div class="row">
         <div class="col-md-4 offset-md-4">
-            <form action="">
+            <form [formGroup]="registration_form" (ngSubmit)="onRegister()">
                 <div class="form-group">
-                    <label for="first_name">First Name:</label>
-                    <input type="text" class="form-control" placeholder="Enter First Name" id="first_name">
-                    <label for="last_name">Last Name:</label>
-                    <input type="text" class="form-control" placeholder="Enter Last Name" id="last_name">
-                  </div>
-                  <div class="form-group">
-                    
-                  </div>
+                  <label for="first_name">First Name:</label>
+                  <input type="text" class="form-control" placeholder="Enter First Name" formControlName="first_name">
+                </div>
+
+                <div class="form-group">
+                  <label for="last_name">Last Name:</label>
+                  <input type="text" class="form-control" placeholder="Enter Last Name" formControlName="last_name">
+                </div>
+
                 <div class="form-group">
                   <label for="email">Email address:</label>
-                  <input type="email" class="form-control" placeholder="Enter email" id="email">
+                  <input type="email" class="form-control" placeholder="Enter email" formControlName="email">
                 </div>
+
                 <div class="form-group">
                   <label for="password">Password:</label>
-                  <input type="password" class="form-control" placeholder="Enter password" id="password">
+                  <input type="password" class="form-control" placeholder="Enter password" formControlName="password">
                 </div>
+
                 <button type="submit" class="btn btn-primary btn-block">Submit</button>
             </form>
             <div class="form-group">

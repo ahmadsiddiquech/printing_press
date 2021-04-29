@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router'
+import { HttpClientModule } from '@angular/common/http'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatCarouselModule } from '@ngmodule/material-carousel';
+import { ServiceService } from './common/services/service.service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,6 +16,7 @@ import { AccountComponent } from './account/account.component';
 import { FooterComponent } from './footer/footer.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -30,6 +33,7 @@ import { RegisterComponent } from './register/register.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     NgbModule,
+    HttpClientModule,
     MatCarouselModule.forRoot(),
     RouterModule.forRoot([
       { path: '',component: HomeComponent },
@@ -38,10 +42,12 @@ import { RegisterComponent } from './register/register.component';
       { path: 'register',component: RegisterComponent },
       { path: 'account',component: AccountComponent }
     ]),
-    
+    ReactiveFormsModule
 
   ],
-  providers: [],
+  providers: [
+    ServiceService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
