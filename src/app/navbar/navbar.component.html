@@ -1,27 +1,112 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="/">Printing Press</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-  
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="/">Home</a>
-        </li>
-        <li ngbDropdown class="nav-item dropdown">
-          <a ngbDropdownToggle class="nav-link dropdown-toggle" >
-            Flyers & Leaflets
-          </a>
-          <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="/flyers">Flyers</a>
-            <a class="dropdown-item" href="/leaflets">Leaflets</a>
-          </div>
-        </li>
-
-        <li class="nav-item">
-            <a class="nav-link" href="/login">Login</a>
-        </li>
-      </ul>
+<section id="top-header" class="clearfix">
+  <div class="container">
+    <div class="row">
+      <div class="top-links col-lg-3 col-md-3 col-sm-12 col-xs-12">
+        <ul>
+          <li >
+            <a href="#">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li >
+            <a href="#">
+              <i class="fa fa-twitter"></i> 
+            </a>
+          </li>
+          <li >
+            <a href="#">
+              <i class="fa fa-pinterest"></i> 
+            </a>
+          </li> 
+          <li >
+            <a href="#">
+              <i class="fa fa-linkedin"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="top-links offset-md-5 col-lg-4 col-md-4 col-sm-12 col-xs-12" style="justify-content: end;">
+        <ul>
+          <li >
+            <a href="#">
+              <i class="fa fa-phone"></i>
+              021-3456-768
+            </a>
+          </li>
+          <li >
+            <a href="#">
+              <i class="fa fa-envelope"></i>
+              abc@gmail.com
+            </a>
+          </li> 
+        </ul>
+      </div>
     </div>
-  </nav>
+  </div>
+</section>
+<header class="main-header">
+  <div class="container">
+    <nav class="navbar navbar-expand-lg main-navbar">
+      <a class="navbar-brand" href="/">Printing Shop</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <!-- <button mat-icon-button [matMenuTriggerFor]="mainMenu" class="navbar-button">
+        <mat-icon>menu</mat-icon>
+      </button> -->
+    
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <button mat-button [matMenuTriggerFor]="allProd" class="navbar-button">All Products</button>
+          <mat-menu #allProd="matMenu" yPosition="below">
+            <a href="/flyers" mat-menu-item>Flyers</a>
+            <a href="/leaflets" mat-menu-item>Leaflets</a>
+          </mat-menu>
+
+          <button mat-button [matMenuTriggerFor]="cardStat" class="navbar-button">Cards & Stationary</button>
+          <mat-menu #cardStat="matMenu" yPosition="below">
+            <a href="#" mat-menu-item>Standard Business Card</a>
+            <a href="#" mat-menu-item>Luxury Cards</a>
+          </mat-menu>
+
+          <button mat-button [matMenuTriggerFor]="bookletsBroch" class="navbar-button">Booklets & Brochures</button>
+          <mat-menu #bookletsBroch="matMenu" yPosition="below">
+            <a href="/#" mat-menu-item>Square</a>
+            <a href="/#" mat-menu-item>Custom</a>
+          </mat-menu>
+
+          <button mat-button [matMenuTriggerFor]="signsPost" class="navbar-button">Signs & Posters</button>
+          <mat-menu #signsPost="matMenu" yPosition="below">
+            <a href="/#" mat-menu-item>A-Boards</a>
+            <a href="/#" mat-menu-item>Banners</a>
+          </mat-menu>
+
+          <button mat-button [matMenuTriggerFor]="labelsPack" class="navbar-button">Labels & Packaging</button>
+          <mat-menu #labelsPack="matMenu" yPosition="below">
+            <a href="/#" mat-menu-item>Packaging</a>
+            <a href="/#" mat-menu-item>Stickers</a>
+            <a href="/#" mat-menu-item>Labels</a>
+          </mat-menu>
+
+          <button mat-button [matMenuTriggerFor]="additional" class="navbar-button">Additional Services</button>
+          <mat-menu #additional="matMenu" yPosition="below">
+            <a href="/#" mat-menu-item>Special Lableling</a>
+          </mat-menu>
+
+        </ul>
+        <div class="d-flex">
+          <ul class="navbar-nav mr-auto">
+            <button mat-icon-button [matMenuTriggerFor]="account" class="navbar-button">
+              <mat-icon>account_circle</mat-icon>
+            </button>
+            <mat-menu #account="matMenu" yPosition="below">
+              <a href="/login" mat-menu-item>Login</a>
+              <a href="/register" mat-menu-item>Register</a>
+            </mat-menu>
+        
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+</header>

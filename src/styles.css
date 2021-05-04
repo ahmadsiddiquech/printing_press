@@ -8,3 +8,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .section-gap{
     padding: 4% 0%;
 }
+ol, ul {
+  list-style: none;
+}

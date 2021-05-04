@@ -1,3 +1,41 @@
+/*Header: Begin*/
+#top-header{
+  background-color: #143D59;
+}
+/*Top link --------------------------*/
+.top-links ul li{
+  float: left;
+  margin-right: 20px;
+  font-size: 16px;
+  line-height: 40px;
+}
+.top-links ul li a{
+  color: #f4b41a;
+}
+.top-links ul li a:hover{
+  color: #fff;
+  text-decoration: none;
+}
+.top-links ul li a i{
+  margin-right: 5px;
+}
+
+/*Main-header-------------------------*/
+.main-header{
+    background-color: #f4b41a;
+    height: 80px;
+}
+.main-navbar{
+    padding-top: 20px !important;
+}
+
 .dropdown-toggle{
     cursor: pointer;
+}
+a:hover{
+    text-decoration: none;
+}
+
+.navbar-brand,.navbar-button{
+    color: #143d59;
 }

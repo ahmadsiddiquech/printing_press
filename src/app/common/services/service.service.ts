@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 export class ServiceService {
 
   private usersUrl = 'http://localhost:3000/api/users';
+  private loginUrl = 'http://localhost:3000/api/login';
   constructor(private http:HttpClient) { }
 
   getUsers(){
@@ -17,12 +18,8 @@ export class ServiceService {
     return this.http.post(this.usersUrl,user);
   }
 
-  // updatePost(post: { id: string; }){
-  //   return this.http.patch(this.usersUrl + '/' + post.id,JSON.stringify({ isRead : true }));
-  // }
+  loginAdmin(user: any){
+    return this.http.post(this.loginUrl,user);
+  }
 
-  // deletePost(id: string | number){
-  //   console.log(id);
-  //   return this.http.delete(this.usersUrl + '/' + id);
-  // }
 }

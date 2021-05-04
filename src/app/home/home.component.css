@@ -1,0 +1,34 @@
+.about-section{
+    min-height:300px;
+    background-size: cover;
+    background:linear-gradient(#143d598a, #f4b31a91),url('../../assets/images/home-bg1.jpeg');
+}
+
+.about-section2{
+    min-height:300px;
+    background-size: cover;
+    background:linear-gradient(#143d598a, #f4b31a91),url('../../assets/images/home-bg2.jpeg');
+}
+
+.left-side{
+    padding: 50px;
+    color: white;
+    font-family: sans-serif;
+}
+.left-side h1{
+    font-size: 40px;
+}
+
+.carousel-image{
+    /* background-size: cover; */
+    width: 100%;
+    height: 430px;
+    background-position: center !important;
+    background-repeat: no-repeat;
+}
+.info-bar{
+    background:linear-gradient(to right,#143d59c9, #f4b31ab7);
+    text-align: center;
+    padding-top: 15px;
+    color: #fff;
+}
