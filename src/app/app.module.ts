@@ -3,13 +3,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router'
 import { HttpClientModule } from '@angular/common/http'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import {MatButtonModule} from '@angular/material/button';
-import {MatMenuModule} from '@angular/material/menu';
+import { MatButtonModule } from '@angular/material/button';
+import { MatMenuModule } from '@angular/material/menu';
 import { ReactiveFormsModule } from '@angular/forms';
-import {MatCardModule} from '@angular/material/card';
+import { MatCardModule } from '@angular/material/card';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+
 import { AppRoutingModule } from './app-routing.module';
-
-
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -23,6 +24,7 @@ import { ServiceService } from './common/services/service.service';
 import { MatIconModule } from '@angular/material/icon';
 import { AllProductsComponent } from './all-products/all-products.component';
 import { TopProductsComponent } from './top-products/top-products.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 
 @NgModule({
@@ -35,7 +37,8 @@ import { TopProductsComponent } from './top-products/top-products.component';
     RegisterComponent,
     HomeComponent,
     AllProductsComponent,
-    TopProductsComponent
+    TopProductsComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     BrowserModule,
@@ -47,11 +50,14 @@ import { TopProductsComponent } from './top-products/top-products.component';
     MatMenuModule,
     MatCardModule,
     MatIconModule,
+    MatFormFieldModule,
+    MatInputModule,
     RouterModule.forRoot([
       { path: '',component: HomeComponent },
       { path: 'flyers',component: FlyersComponent },
       { path: 'login',component: LoginComponent },
       { path: 'register',component: RegisterComponent },
+      { path: 'forgot-password',component: ForgotPasswordComponent },
       { path: 'account',component: AccountComponent }
     ]),
     ReactiveFormsModule

@@ -11,3 +11,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 ol, ul {
   list-style: none;
 }
+
+mat-form-field{
+  width: 100%;
+}
+
+mat-icon{
+  color: #143d59;
+}

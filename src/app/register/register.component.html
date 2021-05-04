@@ -1,28 +1,56 @@
 <div class="container section-gap">
     <div class="row">
-        <div class="col-md-4 offset-md-4">
+        <div class="col-md-6 offset-md-3">
             <form [formGroup]="registration_form" (ngSubmit)="onRegister()">
-                <div class="form-group">
-                  <label for="first_name">First Name:</label>
-                  <input type="text" class="form-control" placeholder="Enter First Name" formControlName="first_name">
+              <div class="row">
+                <div class="col-md-6">
+                  <mat-form-field appearance="outline">
+                    <mat-label>First Name</mat-label>
+                    <input matInput formControlName="first_name" required="required" type="text" placeholder="Enter First Name">
+                    <mat-icon matSuffix>person</mat-icon>
+                    <mat-error *ngIf="first_name.touched && first_name.errors?.required">
+                      Last Name is Required
+                  </mat-error>
+                  <mat-error *ngIf="first_name.touched && first_name.invalid  && !first_name.errors?.required">
+                    Minimum length should be {{ first_name.errors.minlength.requiredLength }} characters
+                  </mat-error>
+                  </mat-form-field>
                 </div>
-
-                <div class="form-group">
-                  <label for="last_name">Last Name:</label>
-                  <input type="text" class="form-control" placeholder="Enter Last Name" formControlName="last_name">
+                <div class="col-md-6">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Last Name</mat-label>
+                    <input matInput formControlName="last_name" required="required" type="text" placeholder="Enter Last Name">
+                    <mat-icon matSuffix>person</mat-icon>
+                    <mat-error *ngIf="last_name.touched && last_name.errors?.required">
+                        Last Name is Required
+                    </mat-error>
+                    <mat-error *ngIf="last_name.touched && last_name.invalid  && !last_name.errors?.required">
+                      Minimum length should be {{ last_name.errors.minlength.requiredLength }} characters
+                    </mat-error>
+                  </mat-form-field>
                 </div>
+              </div>
+              <mat-form-field appearance="outline">
+                <mat-label>Email</mat-label>
+                <input matInput formControlName="email" required="required" type="email" placeholder="Enter Email Address">
+                <mat-icon matSuffix>email</mat-icon>
+                <mat-error *ngIf="email.touched && email.errors?.required">
+                    Email is Required
+                </mat-error>
+                <mat-error *ngIf="email.touched && email.invalid && !email.errors?.required">
+                    Please enter a valid email address
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                  <mat-label>Password</mat-label>
+                  <input matInput formControlName="password" required="required" type="password" placeholder="Enter Password">
+                  <mat-icon matSuffix>lock</mat-icon>
+                  <mat-error *ngIf="password.touched && password.errors?.required">
+                      Password is Required
+                  </mat-error>
+              </mat-form-field>
 
-                <div class="form-group">
-                  <label for="email">Email address:</label>
-                  <input type="email" class="form-control" placeholder="Enter email" formControlName="email">
-                </div>
-
-                <div class="form-group">
-                  <label for="password">Password:</label>
-                  <input type="password" class="form-control" placeholder="Enter password" formControlName="password">
-                </div>
-
-                <button type="submit" class="btn btn-primary btn-block">Submit</button>
+              <button [disabled]="registration_form.invalid" mat-raised-button color="accent" type="submit" class="btn-block">Register</button>
             </form>
             <div class="form-group">
                 <a href="/login">Already a Member</a>
