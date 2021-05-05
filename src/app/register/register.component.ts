@@ -24,7 +24,8 @@ export class RegisterComponent {
       Validators.email,
     ]),
     password: new FormControl('',[
-      Validators.required
+      Validators.required,
+      Validators.minLength(6)
     ])
   });
 
@@ -46,14 +47,17 @@ export class RegisterComponent {
 
   
   onRegister(){
-    var user = this.registration_form.value;
-    user.role = "admin";
-    this.service.resgisterAdmin(user)
-    .subscribe(
-      response => {
-        console.log("done")
-      }
-    )
+    if(this.registration_form.valid){
+      var user = this.registration_form.value;
+      user.role = "admin";
+      this.service.resgisterAdmin(user)
+      .subscribe(
+        response => {
+          console.log("done")
+        }
+      )
+    }
+    
   }
 
 }

@@ -18,6 +18,7 @@ export class LoginComponent {
     ]),
     password: new FormControl('', [
       Validators.required,
+      Validators.minLength(6)
     ])
   });
 
@@ -31,13 +32,16 @@ export class LoginComponent {
 
 
   loginAdmin(){
-    var user = this.login_form.value;
-    this.service.loginAdmin(user)
-    .subscribe(
-      response => {
-        console.log(response);
-      }
-    )
+    if(this.login_form.valid){
+      var user = this.login_form.value;
+      this.service.loginAdmin(user)
+      .subscribe(
+        response => {
+          console.log(response);
+        }
+      )
+    }
+    
   }
 
 }

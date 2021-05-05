@@ -48,9 +48,12 @@
                   <mat-error *ngIf="password.touched && password.errors?.required">
                       Password is Required
                   </mat-error>
+                  <mat-error *ngIf="password.touched && password.invalid  && !password.errors?.required">
+                    Minimum length should be {{ password.errors.minlength.requiredLength }} characters
+                  </mat-error>
               </mat-form-field>
 
-              <button [disabled]="registration_form.invalid" mat-raised-button color="accent" type="submit" class="btn-block">Register</button>
+              <button mat-raised-button color="accent" type="submit" class="btn-block">Register</button>
             </form>
             <div class="form-group">
                 <a href="/login">Already a Member</a>

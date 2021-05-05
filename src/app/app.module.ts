@@ -9,6 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import  {MatStepperModule } from '@angular/material/stepper';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -36,6 +37,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     LoginComponent,
     RegisterComponent,
     HomeComponent,
+    AccountComponent,
     AllProductsComponent,
     TopProductsComponent,
     ForgotPasswordComponent
@@ -52,6 +54,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     MatIconModule,
     MatFormFieldModule,
     MatInputModule,
+    MatStepperModule,
     RouterModule.forRoot([
       { path: '',component: HomeComponent },
       { path: 'flyers',component: FlyersComponent },

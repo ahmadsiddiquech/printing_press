@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { api_base_url } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ServiceService {
 
-  private usersUrl = 'http://localhost:3000/api/users';
-  private loginUrl = 'http://localhost:3000/api/login';
+  private usersUrl = `${api_base_url}api/users`;
+  private loginUrl = `${api_base_url}api/login`;
   constructor(private http:HttpClient) { }
 
   getUsers(){
@@ -20,6 +21,10 @@ export class ServiceService {
 
   loginAdmin(user: any){
     return this.http.post(this.loginUrl,user);
+  }
+
+  updateUsers(user:any){
+    return this.http.put(this.usersUrl,user);
   }
 
 }
