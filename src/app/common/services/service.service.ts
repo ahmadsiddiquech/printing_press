@@ -15,6 +15,10 @@ export class ServiceService {
     return this.http.get(this.usersUrl);
   }
 
+  getUser(id:any){
+    return this.http.get(this.usersUrl+'/'+id);
+  }
+
   resgisterAdmin(user: any){
     return this.http.post(this.usersUrl,user);
   }

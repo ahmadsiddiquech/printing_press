@@ -1,3 +1,5 @@
+import { Router} from '@angular/router';
+import { AuthService } from './../common/services/auth.service';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ServiceService } from '../common/services/service.service';
@@ -9,7 +11,7 @@ import { ServiceService } from '../common/services/service.service';
 })
 export class LoginComponent {
 
-  constructor(private service : ServiceService){ }
+  constructor(private service : ServiceService,private auth : AuthService,private router: Router){ }
 
   login_form = new FormGroup({
     email: new FormControl('', [
@@ -30,18 +32,24 @@ export class LoginComponent {
     return this.login_form.get("password");
   }
 
-
+  private data :any = {};
   loginAdmin(){
     if(this.login_form.valid){
       var user = this.login_form.value;
       this.service.loginAdmin(user)
       .subscribe(
         response => {
-          console.log(response);
+          this.data = response;
+          if(this.data.success === true){
+            this.auth.setLoggedIn(this.data.token,this.data.data);
+            this.router.navigateByUrl('/account');
+          }else{
+            console.log(response);
+          }
+          
         }
       )
     }
-    
   }
 
 }

@@ -8,7 +8,27 @@ import { ServiceService } from '../common/services/service.service';
   styleUrls: ['./account.component.css']
 })
 export class AccountComponent{
-  constructor(private service : ServiceService){ }
+  constructor(private service : ServiceService){
+    const user_id = localStorage.getItem("user_id");
+    this.service.getUser(user_id)
+    .subscribe(
+      response => {
+        this.user_data = response;
+        if(this.user_data.success){
+          this.user_data = this.user_data.data;
+        }
+        console.log(this.user_data);
+      },
+      error => {
+        alert("Unexpected Error Occured"),
+        console.log(error)
+      }
+    )
+  }
+  user_data:any;
+
+
+
   result :any = {};
 
   name_form = new FormGroup({
