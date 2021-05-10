@@ -19,3 +19,10 @@ mat-form-field{
 mat-icon{
   color: #143d59;
 }
+
+.info-bar{
+  background:linear-gradient(to right,#143d59c9, #f4b31ab7);
+  text-align: center;
+  padding-top: 15px;
+  color: #fff;
+}

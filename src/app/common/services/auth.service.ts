@@ -15,10 +15,16 @@ export class AuthService {
 
   get isLoggedIn(){
     this.loggedInStatus = localStorage.getItem('token');
-    if(this.loggedInStatus !== ""){
+    if(this.loggedInStatus !== null){
       return true;
     }else{
       return false;
     }
+  }
+
+  logout(){
+    localStorage.removeItem('token');
+    localStorage.removeItem('user_id');
+    this.loggedInStatus = "";
   }
 }

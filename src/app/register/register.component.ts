@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ServiceService } from '../common/services/service.service';
+import { AuthService } from './../common/services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -8,16 +10,23 @@ import { ServiceService } from '../common/services/service.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
-  constructor(private service : ServiceService){ }
+
+  user_data:any;
+  constructor(private service : ServiceService,private auth : AuthService,private router: Router){
+    const loggedIn = this.auth.isLoggedIn;
+    if(loggedIn){
+      this.router.navigateByUrl("/account");
+    }
+  }
 
   registration_form = new FormGroup({
     first_name: new FormControl('',[
       Validators.required,
-      Validators.minLength(4),
+      Validators.minLength(3),
     ]),
     last_name: new FormControl('',[
       Validators.required,
-      Validators.minLength(4),
+      Validators.minLength(3),
     ]),
     email: new FormControl('',[
       Validators.required,
@@ -53,7 +62,13 @@ export class RegisterComponent {
       this.service.resgisterAdmin(user)
       .subscribe(
         response => {
-          console.log("done")
+          this.user_data = response;
+          if(this.user_data.success === true){
+            this.auth.setLoggedIn(this.user_data.token,this.user_data.data);
+            this.router.navigateByUrl('/account');
+          }else{
+            console.log(response);
+          }
         }
       )
     }

@@ -9,7 +9,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import  {MatStepperModule } from '@angular/material/stepper';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatSelectModule } from '@angular/material/select';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatExpansionModule } from '@angular/material/expansion';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -22,10 +29,11 @@ import { FooterComponent } from './footer/footer.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ServiceService } from './common/services/service.service';
-import { MatIconModule } from '@angular/material/icon';
 import { AllProductsComponent } from './all-products/all-products.component';
 import { TopProductsComponent } from './top-products/top-products.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { FlyerPrintingComponent } from './flyer-printing/flyer-printing.component';
+import { AuthService } from './common/services/auth.service';
 
 
 @NgModule({
@@ -40,7 +48,8 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     AccountComponent,
     AllProductsComponent,
     TopProductsComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    FlyerPrintingComponent
   ],
   imports: [
     BrowserModule,
@@ -55,19 +64,28 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     MatFormFieldModule,
     MatInputModule,
     MatStepperModule,
+    MatTabsModule,
+    MatSelectModule,
+    MatCheckboxModule,
+    MatRadioModule,
+    MatExpansionModule,
     RouterModule.forRoot([
       { path: '',component: HomeComponent },
       { path: 'flyers',component: FlyersComponent },
       { path: 'login',component: LoginComponent },
       { path: 'register',component: RegisterComponent },
       { path: 'forgot-password',component: ForgotPasswordComponent },
-      { path: 'account',component: AccountComponent }
+      { path: 'account',component: AccountComponent },
+      { path: 'flyer-printing',component: FlyerPrintingComponent },
+      { path: 'top-products',component: TopProductsComponent },
+      { path: 'all-products',component: AllProductsComponent }
     ]),
     ReactiveFormsModule
 
   ],
   providers: [
-    ServiceService
+    ServiceService,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })

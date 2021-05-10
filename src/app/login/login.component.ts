@@ -3,15 +3,22 @@ import { AuthService } from './../common/services/auth.service';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ServiceService } from '../common/services/service.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  providers: [MatSnackBar]
 })
 export class LoginComponent {
 
-  constructor(private service : ServiceService,private auth : AuthService,private router: Router){ }
+  constructor(private service : ServiceService,private auth : AuthService,private router: Router,private snackBar: MatSnackBar){
+    const loggedIn = this.auth.isLoggedIn;
+    if(loggedIn){
+      this.router.navigateByUrl("/account");
+    }
+  }
 
   login_form = new FormGroup({
     email: new FormControl('', [
@@ -41,10 +48,13 @@ export class LoginComponent {
         response => {
           this.data = response;
           if(this.data.success === true){
+            
             this.auth.setLoggedIn(this.data.token,this.data.data);
             this.router.navigateByUrl('/account');
           }else{
-            console.log(response);
+            this.snackBar.open(this.data.message, 'Okay', {
+              duration: 5 * 1000,
+            });
           }
           
         }

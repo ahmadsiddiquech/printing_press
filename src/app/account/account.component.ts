@@ -1,44 +1,52 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ServiceService } from '../common/services/service.service';
+import { AuthService } from './../common/services/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'account',
   templateUrl: './account.component.html',
-  styleUrls: ['./account.component.css']
+  styleUrls: ['./account.component.css'],
+  providers: [MatSnackBar]
 })
-export class AccountComponent{
-  constructor(private service : ServiceService){
-    const user_id = localStorage.getItem("user_id");
-    this.service.getUser(user_id)
-    .subscribe(
-      response => {
-        this.user_data = response;
-        if(this.user_data.success){
-          this.user_data = this.user_data.data;
-        }
-        console.log(this.user_data);
-      },
-      error => {
-        alert("Unexpected Error Occured"),
-        console.log(error)
-      }
-    )
-  }
+export class AccountComponent implements OnInit{
+
   user_data:any;
+  result:any;
+  user_id:any;
+  constructor(private service : ServiceService,private auth : AuthService,private router: Router,private snackBar: MatSnackBar){ }
 
-
-
-  result :any = {};
-
+  ngOnInit(){
+    const loggedIn = this.auth.isLoggedIn;
+    if(loggedIn){
+       this.user_id = localStorage.getItem("user_id");
+      this.service.getUser(this.user_id)
+      .subscribe(
+        response => {
+          this.user_data = response;
+          if(this.user_data.success){
+            this.user_data = this.user_data.data;
+          }
+        },
+        error => {
+          console.log(error)
+        }
+      )
+    }else{
+      this.router.navigateByUrl("/");
+    }
+  }
+  
   name_form = new FormGroup({
     first_name: new FormControl('',[
       Validators.required,
-      Validators.minLength(4),
+      Validators.minLength(3),
     ]),
     last_name: new FormControl('',[
       Validators.required,
-      Validators.minLength(4),
+      Validators.minLength(3),
     ])
   });
 
@@ -47,9 +55,9 @@ export class AccountComponent{
       Validators.required,
       Validators.email,
     ]),
-    password: new FormControl('',[
-      Validators.required
-    ])
+    // password: new FormControl('',[
+     
+    // ])
   });
 
  
@@ -72,11 +80,17 @@ export class AccountComponent{
   email_submit(){
     if(this.email_form.valid){
       var user = this.email_form.value;
-      user.role = "admin";
-      this.service.resgisterAdmin(user)
+      this.service.updateUsers(this.user_id,user)
       .subscribe(
         response => {
-          console.log("done")
+          this.result = response;
+          if(this.result.success){
+            this.snackBar.open(this.result.message, 'Okay', {
+              duration: 5 * 1000,
+            });
+          }else{
+            console.log("error");
+          }
         }
       )
     }
@@ -86,11 +100,13 @@ export class AccountComponent{
   name_submit(){
     if(this.name_form.valid){
       var user = this.name_form.value;
-      this.service.updateUsers(user).subscribe(
+      this.service.updateUsers(this.user_id,user).subscribe(
         response => {
           this.result = response;
           if(this.result.success){
-            console.log("success")
+            this.snackBar.open(this.result.message, 'Okay', {
+              duration: 5 * 1000,
+            });
           }else{
             console.log("error");
           }
@@ -98,6 +114,11 @@ export class AccountComponent{
       )
     }
     
+  }
+
+  logout(){
+    this.auth.logout();
+    this.router.navigateByUrl('/');
   }
 
 }

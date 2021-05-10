@@ -1,16 +1,16 @@
 <div class="section-gap container">
-    <div class="row">
-        <div class="col-md-3">
+    <div class="row" *ngIf="user_data">
+        <div class="col-md-3" >
             <mat-card class="example-card">
                 <h1> {{ user_data.first_name }} </h1>
-                <img class="profile_image" mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" >
+                <img class="profile_image" mat-card-image src="../../assets/images/laptop_code.jpg" >
                 <mat-card-content>
                 <div>
                    Email : {{ user_data.email }}
                 </div>
                 </mat-card-content>
                 <mat-card-actions>
-                    <button mat-raised-button color="accent" ><mat-icon>logout</mat-icon>Log Out</button>
+                    <button mat-raised-button color="accent" (click)="logout()" ><mat-icon>logout</mat-icon>Log Out</button>
                 </mat-card-actions>
             </mat-card>
         </div>
@@ -66,14 +66,11 @@
                             Please enter a valid email address
                         </mat-error>
                       </mat-form-field>
-                      <mat-form-field appearance="outline">
+                      <!-- <mat-form-field appearance="outline">
                           <mat-label>Password</mat-label>
-                          <input matInput formControlName="password" required="required" type="password" placeholder="Enter Password">
+                          <input matInput formControlName="password" type="password" placeholder="Enter Password">
                           <mat-icon matSuffix>lock</mat-icon>
-                          <mat-error *ngIf="password.touched && password.errors?.required">
-                              Password is Required
-                          </mat-error>
-                      </mat-form-field>
+                      </mat-form-field> -->
                     <div>
                         <button mat-raised-button color="accent" type="submit" class="btn-block">Update</button>
                     </div>

@@ -27,8 +27,8 @@ export class ServiceService {
     return this.http.post(this.loginUrl,user);
   }
 
-  updateUsers(user:any){
-    return this.http.put(this.usersUrl,user);
+  updateUsers(id:any,user:any){
+    return this.http.put(this.usersUrl+'/'+id,user);
   }
 
 }
