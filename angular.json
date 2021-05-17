@@ -28,7 +28,8 @@
             "aot": true,
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              {"glob": "**/*", "input": "./uploads", "output": "./uploads"}
             ],
             "styles": [
               "src/deeppurple-amber.css",

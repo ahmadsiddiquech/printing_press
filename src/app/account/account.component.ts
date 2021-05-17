@@ -16,11 +16,16 @@ export class AccountComponent implements OnInit{
   user_data:any;
   result:any;
   user_id:any;
+  loggedIn:any;
+  myFile: any;
+  selectedFile: any;
   constructor(private service : ServiceService,private auth : AuthService,private router: Router,private snackBar: MatSnackBar){ }
 
   ngOnInit(){
-    const loggedIn = this.auth.isLoggedIn;
-    if(loggedIn){
+    this.auth.isLoggedIn.subscribe(response => {
+      this.loggedIn = response;
+    });
+    if(this.loggedIn){
        this.user_id = localStorage.getItem("user_id");
       this.service.getUser(this.user_id)
       .subscribe(
@@ -28,6 +33,7 @@ export class AccountComponent implements OnInit{
           this.user_data = response;
           if(this.user_data.success){
             this.user_data = this.user_data.data;
+            this.user_data.image = (this.user_data.image == null) ? '../../assets/images/user_image.png' : 'uploads/images/'+this.user_data.image;
           }
         },
         error => {
@@ -48,6 +54,19 @@ export class AccountComponent implements OnInit{
       Validators.required,
       Validators.minLength(3),
     ])
+  });
+
+  image_form = new FormGroup({
+    name: new FormControl('',[
+      Validators.required
+    ]),
+    file: new FormControl('', [
+      Validators.required
+    ]),
+    imgSrc: new FormControl('', [
+      Validators.required
+    ])
+    
   });
 
   email_form = new FormGroup({
@@ -116,9 +135,36 @@ export class AccountComponent implements OnInit{
     
   }
 
+  image_submit(){
+    const formdata = new FormData();
+    formdata.append('image', this.selectedFile, this.selectedFile.name);
+    this.service.updateUsersImage(this.user_id,formdata).subscribe(
+      response => {
+        this.result = response;
+        if(this.result.success){
+          this.snackBar.open(this.result.message, 'Okay', {
+            duration: 5 * 1000,
+          });
+        }else{
+          console.log("error");
+        }
+      }
+    )
+  }
+
+
+  onImageChange(event :any) {
+    if (event.target.files.length > 0) {
+      this.myFile = event.target.files[0];
+      if (this.myFile.size <= 5242880) {
+        this.selectedFile = event.target.files[0];
+      }
+    }
+  }
+
   logout(){
     this.auth.logout();
-    this.router.navigateByUrl('/');
+    this.router.navigateByUrl('/login');
   }
 
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { AuthService } from '../common/services/auth.service';
 
 @Component({
@@ -8,10 +9,10 @@ import { AuthService } from '../common/services/auth.service';
 })
 export class NavbarComponent{
 
-  loggedIn:any;
+  loggedIn : Observable<boolean>;
 
   constructor(private auth : AuthService) {
-    this.loggedIn = this.auth.isLoggedIn;
+    this.loggedIn = this.auth.isLoggedIn
   }
 
   

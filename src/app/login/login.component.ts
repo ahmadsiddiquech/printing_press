@@ -12,10 +12,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   providers: [MatSnackBar]
 })
 export class LoginComponent {
-
+  loggedIn:any;
   constructor(private service : ServiceService,private auth : AuthService,private router: Router,private snackBar: MatSnackBar){
-    const loggedIn = this.auth.isLoggedIn;
-    if(loggedIn){
+    this.auth.isLoggedIn.subscribe(response => {
+      this.loggedIn = response;
+    });
+    if(this.loggedIn){
       this.router.navigateByUrl("/account");
     }
   }

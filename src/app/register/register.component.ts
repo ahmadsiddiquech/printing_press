@@ -12,9 +12,12 @@ import { AuthService } from './../common/services/auth.service';
 export class RegisterComponent {
 
   user_data:any;
+  loggedIn:any;
   constructor(private service : ServiceService,private auth : AuthService,private router: Router){
-    const loggedIn = this.auth.isLoggedIn;
-    if(loggedIn){
+    this.auth.isLoggedIn.subscribe(response => {
+      this.loggedIn = response;
+    });
+    if(this.loggedIn){
       this.router.navigateByUrl("/account");
     }
   }

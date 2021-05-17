@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -7,19 +8,22 @@ import { HttpClient } from '@angular/common/http';
 export class AuthService {
   loggedInStatus:any;
 
+  private _isLoggedIn = new BehaviorSubject<boolean>(false);
+
   constructor(private http:HttpClient) { }
   setLoggedIn(token :any,data:any){
     localStorage.setItem('token',token);
     localStorage.setItem('user_id',data.id);
   }
 
-  get isLoggedIn(){
+  get isLoggedIn():Observable<boolean>{
     this.loggedInStatus = localStorage.getItem('token');
     if(this.loggedInStatus !== null){
-      return true;
+      this._isLoggedIn.next(true)
     }else{
-      return false;
+      this._isLoggedIn.next(false)
     }
+    return this._isLoggedIn.asObservable();
   }
 
   logout(){

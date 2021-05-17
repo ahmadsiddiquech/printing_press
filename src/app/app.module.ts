@@ -6,6 +6,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -53,6 +54,7 @@ import { AuthService } from './common/services/auth.service';
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     NgbModule,
@@ -81,6 +83,7 @@ import { AuthService } from './common/services/auth.service';
       { path: 'all-products',component: AllProductsComponent }
     ]),
     ReactiveFormsModule
+    
 
   ],
   providers: [

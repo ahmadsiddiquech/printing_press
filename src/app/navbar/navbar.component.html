@@ -96,14 +96,14 @@
         </ul>
         <div class="d-flex">
           <ul class="navbar-nav mr-auto">
-            <button *ngIf="loggedIn == true" mat-icon-button [matMenuTriggerFor]="account" class="navbar-button">
+            <button *ngIf="loggedIn | async" mat-icon-button [matMenuTriggerFor]="account" class="navbar-button">
               <mat-icon>account_circle</mat-icon>
             </button>
             <mat-menu #account="matMenu" yPosition="below">
               <a href="/account" mat-menu-item>Account</a>
             </mat-menu>
 
-            <button *ngIf="!loggedIn" mat-icon-button [matMenuTriggerFor]="login" class="navbar-button">
+            <button *ngIf="!(loggedIn | async)" mat-icon-button [matMenuTriggerFor]="login" class="navbar-button">
               <mat-icon>account_circle</mat-icon>
             </button>
             <mat-menu #login="matMenu" yPosition="below">

@@ -8,7 +8,6 @@ import { api_base_url } from 'src/environments/environment';
 export class ServiceService {
 
   private usersUrl = `${api_base_url}api/users`;
-  private loginUrl = `${api_base_url}api/login`;
   constructor(private http:HttpClient) { }
 
   getUsers(){
@@ -24,11 +23,15 @@ export class ServiceService {
   }
 
   loginAdmin(user: any){
-    return this.http.post(this.loginUrl,user);
+    return this.http.post(this.usersUrl+'/login',user);
   }
 
   updateUsers(id:any,user:any){
     return this.http.put(this.usersUrl+'/'+id,user);
+  }
+
+  updateUsersImage(id:any,user:any){
+    return this.http.put(this.usersUrl+'/upload_image/'+id,user);
   }
 
 }
