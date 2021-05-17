@@ -33,7 +33,6 @@ export class AccountComponent implements OnInit{
           this.user_data = response;
           if(this.user_data.success){
             this.user_data = this.user_data.data;
-            this.user_data.image = (this.user_data.image == null) ? '../../assets/images/user_image.png' : 'uploads/images/'+this.user_data.image;
           }
         },
         error => {

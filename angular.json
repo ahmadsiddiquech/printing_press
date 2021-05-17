@@ -29,7 +29,7 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              {"glob": "**/*", "input": "./uploads", "output": "./uploads"}
+              {"glob": "**/*", "input": "./uploads", "output": "./uploads/"}
             ],
             "styles": [
               "src/deeppurple-amber.css",
