@@ -27,11 +27,11 @@ export class AccountComponent implements OnInit{
     });
     if(this.loggedIn){
        this.user_id = localStorage.getItem("user_id");
-      this.service.getUser(this.user_id)
-      .subscribe(
-        response => {
+       
+      this.service.getUser(this.user_id).subscribe(response => {
           this.user_data = response;
           if(this.user_data.success){
+            
             this.user_data = this.user_data.data;
           }
         },
