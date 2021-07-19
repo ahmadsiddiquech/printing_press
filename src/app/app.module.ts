@@ -72,18 +72,19 @@ import { AuthService } from './common/services/auth.service';
     MatRadioModule,
     MatExpansionModule,
     RouterModule.forRoot([
-      { path: '',component: HomeComponent },
-      { path: 'flyers',component: FlyersComponent },
-      { path: 'login',component: LoginComponent },
-      { path: 'register',component: RegisterComponent },
-      { path: 'forgot-password',component: ForgotPasswordComponent },
-      { path: 'account',component: AccountComponent },
-      { path: 'flyer-printing',component: FlyerPrintingComponent },
-      { path: 'top-products',component: TopProductsComponent },
-      { path: 'all-products',component: AllProductsComponent }
+      { path: '', component: HomeComponent },
+      { path: 'flyers', component: FlyersComponent },
+      { path: 'login', component: LoginComponent },
+      { path: 'register', component: RegisterComponent },
+      { path: 'forgot-password', component: ForgotPasswordComponent },
+      { path: 'account', component: AccountComponent },
+      { path: 'flyer-printing/:id', component: FlyerPrintingComponent },
+      { path: 'flyer-printing', component: FlyerPrintingComponent },
+      { path: 'top-products', component: TopProductsComponent },
+      { path: 'all-products', component: AllProductsComponent }
     ]),
     ReactiveFormsModule
-    
+
 
   ],
   providers: [

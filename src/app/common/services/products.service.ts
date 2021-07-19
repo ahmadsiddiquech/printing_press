@@ -19,6 +19,14 @@ export class ProductsService {
     return this.http.get(this.productsUrl + '/' + id);
   }
 
+  getProductFinishingSize(id: any) {
+    return this.http.get(this.productsUrl + '/product_finishing_size/' + id);
+  }
+
+  getProductPrintedPages(f_size: any, id: any) {
+    return this.http.get(this.productsUrl + '/product_printed_pages/' + id);
+  }
+
   addProduct(product: any) {
     return this.http.post(this.productsUrl, product);
   }

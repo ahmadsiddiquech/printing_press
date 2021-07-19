@@ -1,65 +1,60 @@
 <div class="container section-gap">
-    <div class="row">
+    <div class="row" *ngIf="product">
         <div class="col-md-6 text-center">
-            <img src="../../assets/images/card1.jpg" class="rounded img-fluid" alt="" style="max-width: 80%;">
+            <img src="{{ product.image }}" class="rounded img-fluid" alt="" style="max-width: 80%;">
         </div>
         <div class="col-md-6">
             <div>
-                <h1>Roll Fold Flyers & Leaflets </h1>
+                <h1>{{ product.name }}</h1>
                 <p>
-                    Roll Fold Leaflet printing gives you the freedom to express your brand, showcase your products, or
-                    promote an event over six pages. The Roll Fold uses two vertical folds to create a six-page leaflet
-                    where the two outer leaves are folded into the centre. The result is a slim and elegant leaflet that
-                    holds together well in display racks and beyond, ideal for a tourist destination or product
-                    promotion.
+                    {{ product.description }}
                 </p>
             </div>
             <hr>
             <div>
-                <span style="font-size:30px;">Price :</span><span class="float-right" style="font-size:40px">£
-                    129</span>
-            </div>
-            <hr>
-            <div>
-                <h2 class="text-center">
-                    CUSTOMISE YOUR HALF FOLD FLYERS & LEAFLETS
-                </h2>
-                <mat-form-field>
-                    <mat-label>Finishing Size</mat-label>
-                    <mat-select>
-                        <!-- <mat-option value="folded">Folded</mat-option>
+                <form [formGroup]="product_form" (ngSubmit)="submitProduct()" enctype="multipart/form-data">
+                    <h2 class="text-center">
+                        Customise Your {{ product.name }}
+                    </h2>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Finishing Size</mat-label>
+                        <mat-select formControlName="finishing_size" #finishing_size
+                            (selectionChange)='change_finishing_size(finishing_size.value)'>
+                            <mat-option *ngFor="let f_size of finishing_size" [value]="f_size.finishing_size">
+                                {{f_size.finishing_size}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Printed Pages</mat-label>
+                        <mat-select>
+                            <!-- <mat-option value="folded">Folded</mat-option>
                         <mat-option value="creases">Creased(Supplied Flat)</mat-option> -->
-                    </mat-select>
-                </mat-form-field>
-                <mat-form-field appearance="fill">
-                    <mat-label>Printed Pages</mat-label>
-                    <mat-select disabled>
-                        <!-- <mat-option value="folded">Folded</mat-option>
-                        <mat-option value="creases">Creased(Supplied Flat)</mat-option> -->
-                    </mat-select>
-                </mat-form-field>
-                <mat-form-field appearance="fill">
-                    <mat-label>Stock</mat-label>
-                    <mat-select>
-                        <!-- <mat-option value="A5">A5</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Stock</mat-label>
+                        <mat-select>
+                            <!-- <mat-option value="A5">A5</mat-option>
                         <mat-option value="A4">A4</mat-option>
                         <mat-option value="A3">A3</mat-option> -->
-                    </mat-select>
-                </mat-form-field>
-                <mat-form-field appearance="fill">
-                    <mat-label>Cover</mat-label>
-                    <mat-select>
-                        <!-- <mat-option value="4ppA6">4pp A6</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Cover</mat-label>
+                        <mat-select>
+                            <!-- <mat-option value="4ppA6">4pp A6</mat-option>
                         <mat-option value="4ppA6Strip">4pp A6 Strip</mat-option> -->
-                    </mat-select>
-                </mat-form-field>
-                <mat-form-field appearance="fill">
-                    <mat-label>Lamination</mat-label>
-                    <mat-select>
-                        <!-- <mat-option value="silk">Silk</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Lamination</mat-label>
+                        <mat-select>
+                            <!-- <mat-option value="silk">Silk</mat-option>
                         <mat-option value="gloss">Gloss</mat-option> -->
-                    </mat-select>
-                </mat-form-field>
+                        </mat-select>
+                    </mat-form-field>
+                </form>
             </div>
             <hr>
             <div>
