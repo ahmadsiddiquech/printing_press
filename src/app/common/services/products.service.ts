@@ -77,9 +77,24 @@ export class ProductsService {
     return this.http.post(this.productsUrl + '/product_laminations/', data);
   }
 
-  getProductprices(p_lamination: any, p_cover: any, p_stock: any, p_page: any, f_size: any, id: any) {
+  getProductquantities(p_turnaround: any, p_lamination: any, p_cover: any, p_stock: any, p_page: any, f_size: any, id: any) {
     var data = {
       "id": id,
+      "p_turnaround": p_turnaround,
+      "p_lamination": p_lamination,
+      "p_cover": p_cover,
+      "p_stock": p_stock,
+      "p_page": p_page,
+      "f_size": f_size
+    };
+    return this.http.post(this.productsUrl + '/product_quantities/', data);
+  }
+
+  getProductprices(p_quantity: any, p_turnaround: any, p_lamination: any, p_cover: any, p_stock: any, p_page: any, f_size: any, id: any) {
+    var data = {
+      "id": id,
+      "p_quantity": p_quantity,
+      "p_turnaround": p_turnaround,
       "p_lamination": p_lamination,
       "p_cover": p_cover,
       "p_stock": p_stock,

@@ -35,6 +35,7 @@ import { TopProductsComponent } from './top-products/top-products.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { FlyerPrintingComponent } from './flyer-printing/flyer-printing.component';
 import { AuthService } from './common/services/auth.service';
+import { CartComponent } from './cart/cart.component';
 
 
 @NgModule({
@@ -50,7 +51,8 @@ import { AuthService } from './common/services/auth.service';
     AllProductsComponent,
     TopProductsComponent,
     ForgotPasswordComponent,
-    FlyerPrintingComponent
+    FlyerPrintingComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,

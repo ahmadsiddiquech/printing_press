@@ -12,7 +12,7 @@
             </div>
             <hr>
             <div>
-                <form [formGroup]="product_form" (ngSubmit)="submitProduct()" enctype="multipart/form-data">
+                <form [formGroup]="product_form" enctype="multipart/form-data">
                     <h2 class="text-center">
                         Customise Your {{ product.name }}
                     </h2>
@@ -54,40 +54,54 @@
                     </mat-form-field>
                     <mat-form-field appearance="fill">
                         <mat-label>Lamination</mat-label>
-                        <mat-select formControlName="lamination" #lamination
-                            (selectionChange)='change_lamination(lamination.value,cover.value,stock.value,printed_page.value,finishing_size.value)'>
+                        <mat-select formControlName="lamination" #lamination>
                             <mat-option *ngFor="let p_lamination of laminations" [value]="p_lamination.lamination">
                                 {{p_lamination.lamination}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Turnaround</mat-label>
+                        <mat-select formControlName="turnaround" #turnaround
+                            (selectionChange)='change_turnaround(turnaround.value,lamination.value,cover.value,stock.value,printed_page.value,finishing_size.value)'>
+                            <mat-option value="one_day">One Day</mat-option>
+                            <mat-option value="two_day">Two Day</mat-option>
+                            <mat-option value="three_day">Three Day</mat-option>
+                            <mat-option value="seven_day">Seven Day</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Quantity</mat-label>
+                        <mat-select formControlName="quantity" #quantity
+                            (selectionChange)='change_quantity(quantity.value,turnaround.value,lamination.value,cover.value,stock.value,printed_page.value,finishing_size.value)'>
+                            <mat-option *ngFor="let p_qty of quantities" [value]="p_qty.quantity">
+                                {{p_qty.quantity}} Pcs - £{{p_qty.price}}
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
                 </form>
             </div>
             <hr>
-            <div>
-                <h2 class="text-center">
-                    Delivery
-                </h2>
-                <!-- <section class="example-section">
-                    <label class="example-margin">Delivery Type:</label>
-                    <mat-radio-group>
-                        <mat-radio-button class="example-margin" value="standard">Standerd</mat-radio-button>
-                        <mat-radio-button class="example-margin" value="fast">Fast</mat-radio-button>
-                        <mat-radio-button class="example-margin" value="express">Express</mat-radio-button>
-                    </mat-radio-group>
-                </section> -->
-                <!-- <mat-form-field>
-                    <mat-label>Qty</mat-label>
-                    <input matInput type="number" min="1" required>
-                </mat-form-field> -->
-            </div>
-            <hr>
             <div *ngIf="prices">
-                <span style="font-size:30px;">Total :</span><span class="float-right" style="font-size:40px">£
-                    {{prices.price}}</span>
+                <span style="font-size:30px;">Price :</span><span class="float-right" style="font-size:40px">£
+                    {{prices}}</span>
             </div>
-            <hr>
-            <button mat-raised-button class="btn-block" color="accent">Proceed To Checkout</button>
+
+            <div *ngIf="vats">
+                <hr>
+                <span style="font-size:30px;">Tax/VAT :</span><span class="float-right" style="font-size:40px">£
+                    {{vats}}</span>
+            </div>
+
+            <div *ngIf="totals">
+                <hr>
+                <span style="font-size:30px;">Total :</span><span class="float-right" style="font-size:40px">£
+                    {{totals}}</span>
+                <hr>
+            </div>
+
+            <button mat-raised-button (click)="submitProduct(product_id,turnaround.value)" class="btn-block"
+                color="accent">Add to Basket</button>
         </div>
     </div>
     <div class="container section-gap">
