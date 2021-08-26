@@ -1,1 +1,45 @@
-<p>cart works!</p>
+<div class="container section-gap">
+    <div class="card">
+        <div class="card-body">
+            <h1 class="card-title">Cart</h1>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-borderless" *ngIf="cart_products">
+                <thead class="text-primary">
+                    <th>
+                        Product Info
+                    </th>
+                    <th>
+                        VAT
+                    </th>
+                    <th>
+                        Price
+                    </th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let product of cart_products">
+                        <td>
+                            <b>{{ product.product_type }}</b><br>
+                            {{ product.quantity }}, {{ product.finishing_size }}, {{ product.printed_pages }}, {{
+                            product.stock }}, {{ product.cover }}, {{ product.lamination }}
+                        </td>
+                        <td>
+                            £{{ product.vat }}
+                        </td>
+                        <td>
+                            £{{ product.price }}
+                        </td>
+                        <td>
+                            <button class="btn" (click)="delete_product(product.id)"><i
+                                    class="fa fa-times"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+    <a mat-raised-button color="accent" class="btn pull-right mt-3" href="/place-order">Proceed To Checkout
+    </a>
+</div>

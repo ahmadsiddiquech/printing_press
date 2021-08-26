@@ -1,0 +1,165 @@
+<div class="container section-gap">
+    <div class="row">
+        <div class="col-md-8">
+            <form [formGroup]="orderplacement" (ngSubmit)="submit_order()">
+                <div class="card">
+                    <div class="card-body">
+                        <h1 class="card-title">Delivery Address</h1>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Name</mat-label>
+                                    <input matInput formControlName="name" required="required" type="text"
+                                        placeholder="Enter Name">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-6">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Phone</mat-label>
+                                    <input matInput formControlName="phone" required="required" type="text"
+                                        placeholder="Enter Phone No">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Country</mat-label>
+                                    <input matInput formControlName="country" required="required" type="text"
+                                        placeholder="Enter Country">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-6">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>State</mat-label>
+                                    <input matInput formControlName="state" required="required" type="text"
+                                        placeholder="Enter State">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Postcode</mat-label>
+                                    <input matInput formControlName="postcode" required="required" type="text"
+                                        placeholder="Enter Postcode">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-6">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Address</mat-label>
+                                    <input matInput formControlName="address" required="required" type="text"
+                                        placeholder="Enter Address">
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="card mt-5">
+                    <div class="card-body">
+                        <h1 class="card-title">Billing Address</h1>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <mat-checkbox>Same as Delivery Address</mat-checkbox>
+                            </div>
+                            <div class="col-md-6">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Name</mat-label>
+                                    <input matInput formControlName="name" required="required" type="text"
+                                        placeholder="Enter Name">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-6">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Phone</mat-label>
+                                    <input matInput formControlName="phone" required="required" type="text"
+                                        placeholder="Enter Phone No">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Country</mat-label>
+                                    <input matInput formControlName="country" required="required" type="text"
+                                        placeholder="Enter Country">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-6">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>State</mat-label>
+                                    <input matInput formControlName="state" required="required" type="text"
+                                        placeholder="Enter State">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Postcode</mat-label>
+                                    <input matInput formControlName="postcode" required="required" type="text"
+                                        placeholder="Enter Postcode">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-6">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Address</mat-label>
+                                    <input matInput formControlName="address" required="required" type="text"
+                                        placeholder="Enter Address">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mt-5">
+                    <div class="card-body">
+                        <h1 class="card-title">Payment</h1>
+                    </div>
+                </div>
+                <a mat-raised-button color="accent" class="btn pull-right mt-3" href="/place-order">Confirm Order
+                </a>
+            </form>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="card-title">Order Details</h1>
+                    <div class="table-responsive">
+                        <table class="table table-borderless" *ngIf="cart_products">
+                            <thead class="text-primary">
+                                <th>
+                                    Product Info
+                                </th>
+                                <th>
+                                    VAT
+                                </th>
+                                <th>
+                                    Price
+                                </th>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let product of cart_products">
+                                    <td>
+                                        <b>{{ product.product_type }}</b><br>
+                                        {{ product.quantity }}, {{ product.finishing_size }}, {{ product.printed_pages
+                                        }}, {{
+                                        product.stock }}, {{ product.cover }}, {{ product.lamination }}
+                                    </td>
+                                    <td>
+                                        £{{ product.vat }}
+                                    </td>
+                                    <td>
+                                        £{{ product.price }}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>

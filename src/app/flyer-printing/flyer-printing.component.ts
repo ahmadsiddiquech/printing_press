@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ProductsService } from '../common/services/products.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
 
 
@@ -27,7 +27,9 @@ export class FlyerPrintingComponent {
   vats: any;
   totals: any;
   product_id: any;
-  constructor(private productService: ProductsService, private snackBar: MatSnackBar, private router: ActivatedRoute) { }
+  // cart = new Array();
+  // cart: Array<any> = [];
+  constructor(private productService: ProductsService, private snackBar: MatSnackBar, private router: ActivatedRoute, private route: Router) { }
 
   ngOnInit() {
     this.productService.getProductSubject.subscribe(() => {
@@ -48,7 +50,20 @@ export class FlyerPrintingComponent {
   });
 
   submitProduct(product_id: any, product_turnaround: any) {
-    console.log(product_id, product_turnaround)
+    // var cart = { "product_id": product_id, "product_turnaround": product_turnaround };\
+    // localStorage.removeItem('cart');
+    var cart = [];
+    var existing_cart = JSON.parse(localStorage.getItem("cart") || '{}');
+
+    if (existing_cart.length > 0) {
+      cart.push(...existing_cart);
+    }
+    // console.log(cart);
+    var new_cart = { "product_id": product_id, "product_turnaround": product_turnaround };
+    cart.push(new_cart);
+    // console.log(cart);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    this.route.navigateByUrl('/cart');
   }
 
   fetchProduct() {

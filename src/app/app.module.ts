@@ -36,6 +36,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { FlyerPrintingComponent } from './flyer-printing/flyer-printing.component';
 import { AuthService } from './common/services/auth.service';
 import { CartComponent } from './cart/cart.component';
+import { PlaceOrderComponent } from './place-order/place-order.component';
 
 
 @NgModule({
@@ -52,7 +53,8 @@ import { CartComponent } from './cart/cart.component';
     TopProductsComponent,
     ForgotPasswordComponent,
     FlyerPrintingComponent,
-    CartComponent
+    CartComponent,
+    PlaceOrderComponent
   ],
   imports: [
     BrowserModule,
@@ -83,7 +85,9 @@ import { CartComponent } from './cart/cart.component';
       { path: 'flyer-printing/:id', component: FlyerPrintingComponent },
       { path: 'flyer-printing', component: FlyerPrintingComponent },
       { path: 'top-products', component: TopProductsComponent },
-      { path: 'all-products', component: AllProductsComponent }
+      { path: 'all-products', component: AllProductsComponent },
+      { path: 'cart', component: CartComponent },
+      { path: 'place-order', component: PlaceOrderComponent },
     ]),
     ReactiveFormsModule
 

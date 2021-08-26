@@ -103,4 +103,13 @@ export class ProductsService {
     };
     return this.http.post(this.productsUrl + '/product_prices/', data);
   }
+
+  getProductByProductID(product_id: any, p_turnaround: any) {
+    var data = {
+      "product_id": product_id,
+      "p_turnaround": p_turnaround
+    };
+
+    return this.http.post(this.productsUrl + '/product_by_product_id/', data);
+  }
 }

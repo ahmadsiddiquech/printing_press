@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ProductsService } from '../common/services/products.service';
 
 @Component({
-  selector: 'app-cart',
-  templateUrl: './cart.component.html',
-  styleUrls: ['./cart.component.css']
+  selector: 'app-place-order',
+  templateUrl: './place-order.component.html',
+  styleUrls: ['./place-order.component.css']
 })
-export class CartComponent {
+export class PlaceOrderComponent {
   cart: any;
   result: any;
   cart_products: any = [];
@@ -28,8 +29,31 @@ export class CartComponent {
     }
   }
 
-  delete_product(id: any) {
-    this.cart = localStorage.getItem('cart');
-    console.log(id)
+  orderplacement = new FormGroup({
+    name: new FormControl('', [
+      Validators.required
+    ]),
+    phone: new FormControl('', [
+      Validators.required
+    ]),
+    country: new FormControl('', [
+      Validators.required
+    ]),
+    state: new FormControl('', [
+      Validators.required
+    ]),
+    postcode: new FormControl('', [
+      Validators.required
+    ]),
+    address: new FormControl('', [
+      Validators.required
+    ])
+  });
+
+  submit_order() {
+
   }
+
+
+
 }
