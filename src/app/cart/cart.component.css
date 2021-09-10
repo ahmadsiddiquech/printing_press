@@ -1,0 +1,14 @@
+.card{
+    border-radius:20px;
+}
+tr{
+    border-bottom: 1px solid #f4b41a;
+}
+th{
+    color: #f4b41a;
+    text-shadow: none;
+}
+/* .posbtn{
+    position: relative;
+    bottom:   0;
+} */

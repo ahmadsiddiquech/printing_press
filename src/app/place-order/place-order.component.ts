@@ -10,6 +10,7 @@ import { ProductsService } from '../common/services/products.service';
 export class PlaceOrderComponent {
   cart: any;
   result: any;
+  total_price: any;
   cart_products: any = [];
   constructor(private productService: ProductsService) {
     this.cart = localStorage.getItem('cart');
@@ -21,6 +22,7 @@ export class PlaceOrderComponent {
             this.result = response;
             if (this.result.success) {
               this.cart_products.push(this.result.data[0]);
+              this.total_price = this.total_price + Number(this.result.data[0].price);
             } else {
               this.cart_products = [{ id: 0, name: 'No Record Found' }];
             }
@@ -51,7 +53,7 @@ export class PlaceOrderComponent {
   });
 
   submit_order() {
-
+    // console.log(this.orderplacement.value);
   }
 
 

@@ -24,9 +24,13 @@ export class FlyerPrintingComponent {
   laminations: any;
   quantities: any;
   prices: any;
+  price_table: any
   vats: any;
   totals: any;
   product_id: any;
+  turnaround: any;
+  quantity: any;
+
   // cart = new Array();
   // cart: Array<any> = [];
   constructor(private productService: ProductsService, private snackBar: MatSnackBar, private router: ActivatedRoute, private route: Router) { }
@@ -44,9 +48,7 @@ export class FlyerPrintingComponent {
     printed_page: new FormControl(''),
     stock: new FormControl(''),
     cover: new FormControl(''),
-    lamination: new FormControl(''),
-    turnaround: new FormControl(''),
-    quantity: new FormControl(''),
+    lamination: new FormControl('')
   });
 
   submitProduct(product_id: any, product_turnaround: any) {
@@ -62,7 +64,9 @@ export class FlyerPrintingComponent {
     var new_cart = { "product_id": product_id, "product_turnaround": product_turnaround };
     cart.push(new_cart);
     // console.log(cart);
+
     localStorage.setItem("cart", JSON.stringify(cart));
+    this.productService.setCartQty(cart.length);
     this.route.navigateByUrl('/cart');
   }
 
@@ -98,12 +102,13 @@ export class FlyerPrintingComponent {
     this.product_form.controls['stock'].reset();
     this.product_form.controls['cover'].reset();
     this.product_form.controls['lamination'].reset();
-    this.product_form.controls['turnaround'].reset();
-    this.product_form.controls['quantity'].reset();
     this.prices = '';
+    this.price_table = '';
     this.vats = '';
     this.totals = '';
     this.product_id = '';
+    this.turnaround = '';
+    this.quantity = '';
     this.productService.getProductPrintedPages(f_size, this.id)
       .subscribe(
         response => {
@@ -122,12 +127,13 @@ export class FlyerPrintingComponent {
     this.product_form.controls['stock'].reset();
     this.product_form.controls['cover'].reset();
     this.product_form.controls['lamination'].reset();
-    this.product_form.controls['turnaround'].reset();
-    this.product_form.controls['quantity'].reset();
     this.prices = '';
+    this.price_table = '';
     this.vats = '';
     this.totals = '';
     this.product_id = '';
+    this.turnaround = '';
+    this.quantity = '';
     this.productService.getProductStocks(p_page, f_size, this.id)
       .subscribe(
         response => {
@@ -144,12 +150,13 @@ export class FlyerPrintingComponent {
   change_stock(p_stock: any, p_page: any, f_size: any) {
     this.product_form.controls['cover'].reset();
     this.product_form.controls['lamination'].reset();
-    this.product_form.controls['turnaround'].reset();
-    this.product_form.controls['quantity'].reset();
     this.prices = '';
+    this.price_table = '';
     this.vats = '';
     this.totals = '';
     this.product_id = '';
+    this.turnaround = '';
+    this.quantity = '';
     this.productService.getProductCovers(p_stock, p_page, f_size, this.id)
       .subscribe(
         response => {
@@ -165,12 +172,13 @@ export class FlyerPrintingComponent {
 
   change_cover(p_cover: any, p_stock: any, p_page: any, f_size: any) {
     this.product_form.controls['lamination'].reset();
-    this.product_form.controls['turnaround'].reset();
-    this.product_form.controls['quantity'].reset();
     this.prices = '';
+    this.price_table = '';
     this.vats = '';
     this.totals = '';
     this.product_id = '';
+    this.turnaround = '';
+    this.quantity = '';
     this.productService.getProductLaminations(p_cover, p_stock, p_page, f_size, this.id)
       .subscribe(
         response => {
@@ -184,67 +192,90 @@ export class FlyerPrintingComponent {
       )
   }
 
-  // change_lamination(p_lamination: any, p_cover: any, p_stock: any, p_page: any, f_size: any) {
+  change_lamination(p_lamination: any, p_cover: any, p_stock: any, p_page: any, f_size: any) {
+    this.prices = '';
+    this.price_table = '';
+    this.vats = '';
+    this.totals = '';
+    this.product_id = '';
+    this.turnaround = '';
+    this.quantity = '';
+    this.productService.getProductCompletePrices(p_lamination, p_cover, p_stock, p_page, f_size, this.id)
+      .subscribe(
+        response => {
+          this.result = response;
+          if (this.result.success) {
+            this.price_table = this.result.data;
+          } else {
+            this.price_table = [{ id: 0, name: 'No Record Found' }];
+          }
+        }
+      )
+  }
+  selected: any;
+  calculate_price(product_id: any, price: any, turnaround: any, vat: any, qty: any) {
+    this.product_id = product_id;
+    this.turnaround = turnaround;
+    this.quantity = qty;
+    this.prices = Number(price);
+    this.vats = Number(vat);
+
+    if (this.vats > 0) {
+      this.totals = this.prices + (this.prices * (this.vats / 100));
+    } else {
+      this.totals = this.prices;
+    }
+
+  }
+
+  // change_turnaround(p_turnaround: any, p_lamination: any, p_cover: any, p_stock: any, p_page: any, f_size: any) {
+  //   this.product_form.controls['quantity'].reset();
   //   this.prices = '';
-  //   this.productService.getProductprices(p_lamination, p_cover, p_stock, p_page, f_size, this.id)
+  //   this.vats = '';
+  //   this.totals = '';
+  //   this.product_id = '';
+  //   this.productService.getProductquantities(p_turnaround, p_lamination, p_cover, p_stock, p_page, f_size, this.id)
   //     .subscribe(
   //       response => {
   //         this.result = response;
+  //         console.log(this.result)
   //         if (this.result.success) {
-  //           this.prices = this.result.data;
+  //           this.quantities = this.result.data;
   //         } else {
-  //           this.prices = [{ id: 0, name: 'No Record Found' }];
+  //           this.quantities = [{ id: 0, name: 'No Record Found' }];
   //         }
   //       }
   //     )
   // }
 
-  change_turnaround(p_turnaround: any, p_lamination: any, p_cover: any, p_stock: any, p_page: any, f_size: any) {
-    this.product_form.controls['quantity'].reset();
-    this.prices = '';
-    this.vats = '';
-    this.totals = '';
-    this.product_id = '';
-    this.productService.getProductquantities(p_turnaround, p_lamination, p_cover, p_stock, p_page, f_size, this.id)
-      .subscribe(
-        response => {
-          this.result = response;
-          if (this.result.success) {
-            this.quantities = this.result.data;
-          } else {
-            this.quantities = [{ id: 0, name: 'No Record Found' }];
-          }
-        }
-      )
-  }
 
-  change_quantity(p_quantity: any, p_turnaround: any, p_lamination: any, p_cover: any, p_stock: any, p_page: any, f_size: any) {
-    this.prices = '';
-    this.vats = '';
-    this.totals = '';
-    this.product_id = '';
-    this.productService.getProductprices(p_quantity, p_turnaround, p_lamination, p_cover, p_stock, p_page, f_size, this.id)
-      .subscribe(
-        response => {
-          this.result = response;
-          if (this.result.success) {
-            this.result = this.result.data[0];
-            this.product_id = this.result.product_id;
-            this.prices = Number(this.result.price);
-            this.vats = Number(this.result.vat);
+  // change_quantity(p_quantity: any, p_turnaround: any, p_lamination: any, p_cover: any, p_stock: any, p_page: any, f_size: any) {
+  //   this.prices = '';
+  //   this.vats = '';
+  //   this.totals = '';
+  //   this.product_id = '';
+  //   this.productService.getProductprices(p_quantity, p_turnaround, p_lamination, p_cover, p_stock, p_page, f_size, this.id)
+  //     .subscribe(
+  //       response => {
+  //         this.result = response;
+  //         if (this.result.success) {
+  //           this.result = this.result.data[0];
+  //           this.product_id = this.result.product_id;
+  //           this.prices = Number(this.result.price);
+  //           this.vats = Number(this.result.vat);
 
-            if (this.vats > 0) {
-              this.totals = this.prices + (this.prices / this.vats);
-            } else {
-              this.totals = this.prices;
-            }
+  //           if (this.vats > 0) {
+  //             this.totals = this.prices + (this.prices * (this.vats / 100));
+  //           } else {
+  //             this.totals = this.prices;
+  //           }
 
-          } else {
-            this.totals = [{ id: 0, name: 'No Record Found' }];
-          }
-        }
-      )
-  }
+  //         } else {
+  //           this.totals = [{ id: 0, name: 'No Record Found' }];
+  //         }
+  //       }
+  //     )
+  // }
 
 
 }

@@ -9,6 +9,7 @@ export class ProductsService {
 
   private productsUrl = `http://localhost:3000/api/products`;
   constructor(private http: HttpClient) { }
+  public _cartQty = new BehaviorSubject<number>(0);
   public getProductSubject: BehaviorSubject<any> = new BehaviorSubject<any>(false);
 
   getProducts(): Observable<any> {
@@ -77,6 +78,18 @@ export class ProductsService {
     return this.http.post(this.productsUrl + '/product_laminations/', data);
   }
 
+  getProductCompletePrices(p_lamination: any, p_cover: any, p_stock: any, p_page: any, f_size: any, id: any) {
+    var data = {
+      "id": id,
+      "p_lamination": p_lamination,
+      "p_cover": p_cover,
+      "p_stock": p_stock,
+      "p_page": p_page,
+      "f_size": f_size
+    };
+    return this.http.post(this.productsUrl + '/product_complete_prices/', data);
+  }
+
   getProductquantities(p_turnaround: any, p_lamination: any, p_cover: any, p_stock: any, p_page: any, f_size: any, id: any) {
     var data = {
       "id": id,
@@ -112,4 +125,32 @@ export class ProductsService {
 
     return this.http.post(this.productsUrl + '/product_by_product_id/', data);
   }
+
+  // getCartQty() {
+  //   let cart: any;
+  //   cart = localStorage.getItem('cart');
+  //   cart = JSON.parse(cart);
+  //   if (cart) {
+  //     return cart.length;
+  //   } else {
+  //     return 0;
+  //   }
+  // }
+
+  get getCartQty(): Observable<number> {
+    let cart: any;
+    cart = localStorage.getItem('cart');
+    cart = JSON.parse(cart);
+    if (cart.length > 0) {
+      this._cartQty.next(cart.length)
+    } else {
+      this._cartQty.next(0)
+    }
+    return this._cartQty.asObservable();
+  }
+
+  setCartQty(cart: any) {
+    this._cartQty.next(cart);
+  }
+
 }

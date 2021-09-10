@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule } from '@angular/router'
 import { HttpClientModule } from '@angular/common/http'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatButtonModule } from '@angular/material/button';
@@ -37,6 +36,9 @@ import { FlyerPrintingComponent } from './flyer-printing/flyer-printing.componen
 import { AuthService } from './common/services/auth.service';
 import { CartComponent } from './cart/cart.component';
 import { PlaceOrderComponent } from './place-order/place-order.component';
+import { AddressBookComponent } from './address-book/address-book.component';
+import { OrderHistoryComponent } from './order-history/order-history.component';
+import { ProductsService } from './common/services/products.service';
 
 
 @NgModule({
@@ -54,7 +56,9 @@ import { PlaceOrderComponent } from './place-order/place-order.component';
     ForgotPasswordComponent,
     FlyerPrintingComponent,
     CartComponent,
-    PlaceOrderComponent
+    PlaceOrderComponent,
+    AddressBookComponent,
+    OrderHistoryComponent
   ],
   imports: [
     BrowserModule,
@@ -75,27 +79,14 @@ import { PlaceOrderComponent } from './place-order/place-order.component';
     MatCheckboxModule,
     MatRadioModule,
     MatExpansionModule,
-    RouterModule.forRoot([
-      { path: '', component: HomeComponent },
-      { path: 'flyers', component: FlyersComponent },
-      { path: 'login', component: LoginComponent },
-      { path: 'register', component: RegisterComponent },
-      { path: 'forgot-password', component: ForgotPasswordComponent },
-      { path: 'account', component: AccountComponent },
-      { path: 'flyer-printing/:id', component: FlyerPrintingComponent },
-      { path: 'flyer-printing', component: FlyerPrintingComponent },
-      { path: 'top-products', component: TopProductsComponent },
-      { path: 'all-products', component: AllProductsComponent },
-      { path: 'cart', component: CartComponent },
-      { path: 'place-order', component: PlaceOrderComponent },
-    ]),
     ReactiveFormsModule
 
 
   ],
   providers: [
     ServiceService,
-    AuthService
+    AuthService,
+    ProductsService
   ],
   bootstrap: [AppComponent]
 })

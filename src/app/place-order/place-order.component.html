@@ -117,11 +117,26 @@
 
                 <div class="card mt-5">
                     <div class="card-body">
+                        <h1 class="card-title">Design Files</h1>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 mb-5">
+                            <button mat-raised-button type="submit" color="accent" class="btn mt-3 pull-right"
+                                href="#">Upload PDF
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="card mt-5">
+                    <div class="card-body">
                         <h1 class="card-title">Payment</h1>
                     </div>
                 </div>
-                <a mat-raised-button color="accent" class="btn pull-right mt-3" href="/place-order">Confirm Order
-                </a>
+                <button mat-raised-button type="submit" color="accent" class="btn pull-right mt-3"
+                    href="/place-order">Confirm Order
+                </button>
             </form>
         </div>
         <div class="col-md-4">
@@ -155,6 +170,10 @@
                                     <td>
                                         £{{ product.price }}
                                     </td>
+                                </tr>
+                                <tr>
+                                    <td>Total</td>
+                                    <td colspan="2">{{total_price}}</td>
                                 </tr>
                             </tbody>
                         </table>

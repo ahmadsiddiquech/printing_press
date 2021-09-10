@@ -1,0 +1,24 @@
+<mat-accordion class="example-headers-align">
+    <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle
+        *ngFor="let p of  orderDetail ;let i=index ">
+        <mat-expansion-panel-header class="card my-3">
+            <mat-panel-title>
+                Ref: {{p.ref}} || {{p.condition}}
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="row">
+            <div class="col-4">
+                <img mat-card-image src="{{p.img}}" alt="Photo of a Shiba Inu">
+            </div>
+            <div class="col-8">
+                <mat-label> <b> {{p.size}} {{p.type }}</b></mat-label>
+                <p> hellow world</p>
+            </div>
+        </div>
+        <hr>
+        <div class="d-flex justify-content-between">
+            <button mat-raised-button color="accent">Download Invoice </button>
+            <button mat-raised-button color="accent">Reload</button>
+        </div>
+    </mat-expansion-panel>
+</mat-accordion>

@@ -1,15 +1,18 @@
-
-.example-section {
-display: flex;
-align-content: center;
-align-items: center;
-height: 60px;
+.data-selected {
+  background-color: #143d59 !important;
+  color: white !important;
+  border:2px solid #f4b41a !important;
+}
+td:hover {
+  background-color: #143d59 !important;
+  color: white !important;
+  cursor:pointer;
 }
 
-.example-margin {
-margin: 0 10px;
+.table-bordered th, .table-bordered td{
+  border: 1px solid #143D59;
 }
-
-.mat-form-field + .mat-form-field {
-margin-left: 8px;
+.row-bg {
+  background-color: #ceeafd;
+  color: rgb(0, 0, 0);
 }

@@ -1,0 +1,205 @@
+<div class="container">
+    <div class="row justify-content-center py-3 my-3">
+        <h1 style="vertical-align: middle;">
+            Address Book
+        </h1>
+    </div>
+</div>
+<div class="container  my-3">
+    <div class="row justify-content-center py-3">
+        <h1 style="vertical-align: middle;">
+            Your Primary Address
+        </h1>
+    </div>
+    <div class=" row d-flex justify-content-around  pb-5 ml-2 mr-2">
+        <div>
+            <div class="card mb-3" style="width: 20rem;">
+                <div class="card-body">
+                    <div class="row justify-content-between ">
+                        <div class="ml-3">
+                            <b>Billing Address</b>
+                        </div>
+                        <div class="mr-3">
+                            <span><b>£</b></span>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <p>
+                            Faizan Younas Liaquat pur Distric Rahim Yar khan Punjab Pakistan Faizan Younas Liaquat pur
+                            Distric Rahim
+                            Yar khan Punjab Pakistan
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="card mb-3" style="width: 20rem;">
+                <div class="card-body">
+                    <div class="row justify-content-between">
+                        <div class="ml-3">
+                            <b>Delivery Address</b>
+                        </div>
+                        <div class="mr-3">
+                            <mat-icon>local_shipping</mat-icon>
+                        </div>
+                    </div>
+                    <div class="mt-1">
+                        <p>
+                            Faizan Younas Liaquat pur Distric Rahim Yar khan Punjab PakistanFaizan Younas Liaquat pur
+                            Distric Rahim
+                            Yar khan Punjab Pakistan
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row justify-content-center py-3">
+        <h1 style="vertical-align: middle;">
+            Address Book
+        </h1>
+    </div>
+    <div class=" row ">
+        <div class="col-md-6 col-lg-4">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <div class="row justify-content-center">
+                        <h1>
+                            Add new Adress
+                        </h1>
+                    </div>
+                    <div class="mt-1 row justify-content-center ">
+                        <input class=" btn-search" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn  " Style="background-color:pink">
+                            <mat-icon>search</mat-icon>
+                        </button>
+                    </div>
+                    <div class="mt-1 row justify-content-center ">
+                        <a style="color: rgb(195, 49, 73);" (click)="open(content)"><u>Enter Manually</u></a>
+                        <!-- <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Launch demo modal</button> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *ngFor="let p of myobj ;let i=index " class="col-md-6 col-lg-4">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <div class="row justify-content-between">
+                        <div class="pl-3">
+                            {{p.name}}
+                        </div>
+                        <div class="mr-3">
+                            <mat-icon>delete_outline</mat-icon>
+                        </div>
+                    </div>
+                    <div class="mt-1">
+                        <p>
+                            {{p.phone}}
+                        </p>
+                    </div>
+                    <div>
+                        <span class="pr-4 mb-3"><b>£</b></span>
+                        <a href="" class="pr-2"> <u>Set a billing Address</u></a>
+                    </div>
+                    <div>
+                        <span class="pr-2 mb-3">
+                            <mat-icon> local_shipping</mat-icon>
+                        </span>
+                        <a href="" class="pr-2"> <u>Set as Delivery Address</u></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ========Modal to add new Adress =========== -->
+<ng-template #content let-modal>
+    <div class="modal-header ">
+        <h4 class="modal-title justify-content-center" id="modal-basic-title">Add new Adress</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form #f="ngForm" (ngSubmit)="Save(f.value)">
+            <div>
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div>
+                            <mat-form-field>
+                                <input matInput #fname="ngModel" ngModel name="fname" id="fname"
+                                    placeholder="Contact First Name " required>
+                            </mat-form-field>
+                        </div>
+                        <div>
+                            <mat-form-field>
+                                <input matInput #lname="ngModel" ngModel name="lname" id="lname"
+                                    placeholder="Contact Last Name " required>
+                            </mat-form-field>
+                        </div>
+                        <div>
+                            <mat-form-field>
+                                <input matInput #cname="ngModel" ngModel name="cname" id="cname"
+                                    placeholder="Comapany Name " required>
+                            </mat-form-field>
+                        </div>
+                        <div>
+                            <mat-form-field>
+                                <input matInput #contact="ngModel" ngModel name="contact" id="contact"
+                                    placeholder="Contact Telephone " required>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                        <div>
+                            <mat-form-field>
+                                <input matInput #line1="ngModel" ngModel name="line1" id="line1"
+                                    placeholder="Enter street Adress " required>
+                            </mat-form-field>
+                        </div>
+                        <div>
+                            <mat-form-field>
+                                <input matInput #line2="ngModel" ngModel name="line2" id="line2"
+                                    placeholder="Enter street Adress " required>
+                            </mat-form-field>
+                        </div>
+                        <div>
+                            <mat-form-field>
+                                <input matInput #town="ngModel" ngModel name="town" id="town"
+                                    placeholder="Enter Town/city" required>
+                            </mat-form-field>
+                        </div>
+                        <div>
+                            <mat-form-field>
+                                <input matInput #country="ngModel" ngModel name="country" id="country"
+                                    placeholder="Enter country" required>
+                            </mat-form-field>
+                        </div>
+                        <mat-form-field>
+                            <input matInput #PostCode="ngModel" ngModel name="PostCode" id="PostCode"
+                                placeholder="Enter PostCode" required>
+                        </mat-form-field>
+                        <div>
+                            <mat-label for="contact">Mandatory Field <span>*</span>:</mat-label>
+                            <section class="example-section">
+                                <mat-checkbox [checked]="checked" (click)="onClick($event)">Primary Adress
+                                </mat-checkbox>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class=" row justify-content-end mt-4  ">
+                <div class="pr-4">
+                    <button class="btn mr-2" style="background-color:rgb(143, 143, 143)"
+                        (click)="modal.close('Save click')">Close</button>
+                    <button type="submit" mat-raised-button color="accent" (click)="modal.close('Save click')">Add
+                        Adress</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</ng-template>
