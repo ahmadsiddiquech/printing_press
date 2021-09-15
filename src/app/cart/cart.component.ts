@@ -45,20 +45,6 @@ export class CartComponent {
 
   }
 
-  // delete_product(id: any, product_turnaround: any) {
-  //   this.cart = localStorage.getItem('cart');
-  //   this.cart = JSON.parse(this.cart);
-
-  //   for (let i = 0; i < this.cart.length; i++) {
-  //     if (this.cart[i].product_id == id && this.cart[i].product_turnaround == product_turnaround) {
-  //       this.cart.splice(i, 1);
-  //     }
-  //   }
-  //   localStorage.removeItem('cart');
-  //   localStorage.setItem("cart", JSON.stringify(this.cart));
-  //   window.location.reload();
-  // }
-
   delete_product(index: any) {
     this.cart = localStorage.getItem('cart');
     this.cart = JSON.parse(this.cart);

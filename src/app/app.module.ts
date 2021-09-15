@@ -39,6 +39,7 @@ import { PlaceOrderComponent } from './place-order/place-order.component';
 import { AddressBookComponent } from './address-book/address-book.component';
 import { OrderHistoryComponent } from './order-history/order-history.component';
 import { ProductsService } from './common/services/products.service';
+import { AccountSidenavComponent } from './account-sidenav/account-sidenav.component';
 
 
 @NgModule({
@@ -58,7 +59,8 @@ import { ProductsService } from './common/services/products.service';
     CartComponent,
     PlaceOrderComponent,
     AddressBookComponent,
-    OrderHistoryComponent
+    OrderHistoryComponent,
+    AccountSidenavComponent
   ],
   imports: [
     BrowserModule,
@@ -80,8 +82,6 @@ import { ProductsService } from './common/services/products.service';
     MatRadioModule,
     MatExpansionModule,
     ReactiveFormsModule
-
-
   ],
   providers: [
     ServiceService,

@@ -102,6 +102,7 @@
             </button>
             <mat-menu #account="matMenu" yPosition="below">
               <a routerLink="/account" mat-menu-item>Account</a>
+              <a (click)="logout()" mat-menu-item>Log Out</a>
             </mat-menu>
 
             <button *ngIf="!(loggedIn | async)" mat-icon-button [matMenuTriggerFor]="login" class="navbar-button">

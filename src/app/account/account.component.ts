@@ -29,10 +29,9 @@ export class AccountComponent implements OnInit {
       this.user_id = localStorage.getItem("user_id");
 
       this.service.getUser(this.user_id).subscribe(response => {
-        this.user_data = response;
-        if (this.user_data.success) {
-
-          this.user_data = this.user_data.data;
+        this.result = response;
+        if (this.result.success) {
+          this.user_data = this.result.data;
         }
       },
         error => {
@@ -52,30 +51,33 @@ export class AccountComponent implements OnInit {
     last_name: new FormControl('', [
       Validators.required,
       Validators.minLength(3),
-    ])
-  });
-
-  image_form = new FormGroup({
-    name: new FormControl('', [
-      Validators.required
     ]),
-    file: new FormControl('', [
-      Validators.required
-    ]),
-    imgSrc: new FormControl('', [
-      Validators.required
-    ])
-
-  });
-
-  email_form = new FormGroup({
     email: new FormControl('', [
       Validators.required,
       Validators.email,
     ]),
-    // password: new FormControl('',[
+    telephone: new FormControl('', [
+      Validators.required,
+    ]),
+    mobile: new FormControl('', [
+      Validators.required,
+    ])
+  });
 
-    // ])
+
+  password_form = new FormGroup({
+    old_password: new FormControl('', [
+      Validators.required,
+      Validators.email,
+    ]),
+    new_password: new FormControl('', [
+      Validators.required,
+      Validators.email,
+    ]),
+    renew_password: new FormControl('', [
+      Validators.required,
+      Validators.email,
+    ])
   });
 
 
@@ -88,16 +90,29 @@ export class AccountComponent implements OnInit {
   }
 
   get email() {
-    return this.email_form.get("email");
+    return this.name_form.get("email");
   }
 
-  get password() {
-    return this.email_form.get("password");
+  get telephone() {
+    return this.name_form.get("telephone");
+  }
+  get mobile() {
+    return this.name_form.get("mobile");
   }
 
-  email_submit() {
-    if (this.email_form.valid) {
-      var user = this.email_form.value;
+  get old_password() {
+    return this.password_form.get("old_password");
+  }
+  get new_password() {
+    return this.password_form.get("new_password");
+  }
+  get renew_password() {
+    return this.password_form.get("renew_password");
+  }
+
+  password_submit() {
+    if (this.password_form.valid) {
+      var user = this.password_form.value;
       this.service.updateUsers(this.user_id, user)
         .subscribe(
           response => {

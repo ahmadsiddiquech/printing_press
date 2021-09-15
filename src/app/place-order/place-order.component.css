@@ -1,0 +1,7 @@
+.checked{
+    border: 2px solid #f4b41a;
+}
+
+.my-card{
+    cursor: pointer;
+}

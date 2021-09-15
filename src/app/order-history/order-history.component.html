@@ -1,24 +1,38 @@
-<mat-accordion class="example-headers-align">
-    <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle
-        *ngFor="let p of  orderDetail ;let i=index ">
-        <mat-expansion-panel-header class="card my-3">
-            <mat-panel-title>
-                Ref: {{p.ref}} || {{p.condition}}
-            </mat-panel-title>
-        </mat-expansion-panel-header>
-        <div class="row">
-            <div class="col-4">
-                <img mat-card-image src="{{p.img}}" alt="Photo of a Shiba Inu">
-            </div>
-            <div class="col-8">
-                <mat-label> <b> {{p.size}} {{p.type }}</b></mat-label>
-                <p> hellow world</p>
-            </div>
+<div class="section-gap container">
+    <div class="row">
+        <div class="col-md-3">
+            <app-account-sidenav></app-account-sidenav>
         </div>
-        <hr>
-        <div class="d-flex justify-content-between">
-            <button mat-raised-button color="accent">Download Invoice </button>
-            <button mat-raised-button color="accent">Reload</button>
+        <div class="col-md-9">
+            <mat-accordion class="example-headers-align">
+                <mat-expansion-panel hideToggle *ngFor="let p of orderDetail ;let i=index ">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            Ref: {{p.ref}} || {{p.condition}}
+
+                        </mat-panel-title>
+                        <span style="text-align: end;">
+                            <mat-icon>expand_more</mat-icon>
+                        </span>
+                    </mat-expansion-panel-header>
+
+                    <div class="row">
+                        <div class="col-4">
+                            <img mat-card-image src="{{p.img}}" alt="Photo of a Shiba Inu">
+                        </div>
+                        <div class="col-8">
+                            <mat-label> <b> {{p.size}} {{p.type }}</b></mat-label>
+                            <p> hellow world</p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="d-flex justify-content-between">
+                        <button mat-raised-button color="accent">Download Invoice </button>
+                        <button mat-raised-button color="accent">Reload</button>
+                    </div>
+                </mat-expansion-panel>
+            </mat-accordion>
         </div>
-    </mat-expansion-panel>
-</mat-accordion>
+    </div>
+
+</div>
