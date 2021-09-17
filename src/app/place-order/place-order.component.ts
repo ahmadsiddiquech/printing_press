@@ -1,15 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AddressService } from '../common/services/address.service';
 import { AuthService } from '../common/services/auth.service';
+import { OrderService } from '../common/services/order.service';
 import { ProductsService } from '../common/services/products.service';
 import { ServiceService } from '../common/services/service.service';
 
 @Component({
   selector: 'app-place-order',
   templateUrl: './place-order.component.html',
-  styleUrls: ['./place-order.component.css']
+  styleUrls: ['./place-order.component.css'],
+  providers: [MatSnackBar]
 })
 export class PlaceOrderComponent {
   cart: any;
@@ -22,9 +25,10 @@ export class PlaceOrderComponent {
   addresses: any;
   billing_address: any;
   delivery_address: any;
+  selectedFile: any = [];
 
 
-  constructor(private addressService: AddressService, private productService: ProductsService, private service: ServiceService, private auth: AuthService, private router: Router) { }
+  constructor(private addressService: AddressService, private productService: ProductsService, private service: ServiceService, private auth: AuthService, private order: OrderService, private router: Router, private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.auth.isLoggedIn.subscribe(response => {
@@ -40,6 +44,7 @@ export class PlaceOrderComponent {
             response => {
               this.result = response;
               if (this.result.success) {
+                this.result.data[0].product_turnaround = this.cart[i].product_turnaround;
                 this.cart_products.push(this.result.data[0]);
                 this.total_price = this.total_price + Number(this.result.data[0].price);
               } else {
@@ -111,8 +116,61 @@ export class PlaceOrderComponent {
     ])
   });
 
-  submit_order() {
-    // console.log(this.orderplacement.value);
+  image_submit() {
+    const formdata = new FormData();
+    formdata.append('image', this.selectedFile, this.selectedFile.name);
+    this.service.updateUsersImage(this.user_id, formdata).subscribe(
+      response => {
+        this.result = response;
+        if (this.result.success) {
+        } else {
+          console.log("error");
+        }
+      }
+    )
+  }
+
+
+  onImageChange(index: any, event: any, product_id: any, product_turnaround: any) {
+    if (event.target.files.length > 0) {
+
+      if (event.target.files[0].size <= 5242880) {
+        event.target.files[0].product_id = product_id;
+        event.target.files[0].product_turnaround = product_turnaround;
+        this.selectedFile.splice(index, 1, event.target.files[0]);
+      } else {
+        this.snackBar.open('Upload File Less than 5 MB', 'Okay', {
+          duration: 5 * 1000,
+        });
+      }
+    }
+  }
+
+  place_order() {
+    const formdata = new FormData();
+    formdata.append('image', this.selectedFile);
+    var data = {
+      "user_id": this.user_id,
+      "order_products": this.cart,
+      "product_designs": this.selectedFile,
+      "billing_address": this.billing_address,
+      "delivery_address": this.delivery_address,
+      "total_price": this.total_price
+    };
+    this.order.addOrder(data).subscribe(
+      response => {
+        this.result = response;
+        if (this.result.success) {
+          localStorage.removeItem('cart');
+          this.productService.setCartQty(0);
+          this.router.navigateByUrl("/my-order-history");
+        } else {
+          this.snackBar.open('Please Try Later', 'Okay', {
+            duration: 5 * 1000,
+          });
+        }
+      }
+    )
   }
 
 

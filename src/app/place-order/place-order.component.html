@@ -19,6 +19,10 @@
                                             <b>{{p.contact_name}}</b><br>
                                             {{p.company_name}}
                                         </div>
+                                        <div class="pr-3">
+                                            <mat-icon [ngClass]="{'checked1':p.id === delivery_address}">local_shipping
+                                            </mat-icon>
+                                        </div>
                                     </div>
                                     <div class="mt-1">
                                         <p>
@@ -50,6 +54,10 @@
                                             <b>{{p.contact_name}}</b><br>
                                             {{p.company_name}}
                                         </div>
+                                        <div class="pr-3">
+                                            <mat-icon [ngClass]="{'checked1':p.id === billing_address}">attach_money
+                                            </mat-icon>
+                                        </div>
                                     </div>
                                     <div class="mt-1">
                                         <p>
@@ -71,17 +79,25 @@
                         </h1>
 
                     </mat-expansion-panel-header>
-                    <div class="row mb-3" *ngFor="let product of cart_products">
-                        <div class="col-md-8">
+                    <div class="row mb-3" *ngFor="let product of cart_products;let i = index">
+                        <div class="col-md-9">
                             <b>{{ product.product_type }}</b><br>
                             {{ product.quantity }}, {{ product.finishing_size }}, {{ product.printed_pages
                             }}, {{
                             product.stock }}, {{ product.cover }}, {{ product.lamination }}
                         </div>
-                        <div class="col-md-4">
-                            <input type="file" name="product_design[]" mat-raised-button
-                                style="border: 1px solid #f4b41a" />
-                        </div>
+                        <form>
+                            <div class="col-md-3">
+                                <button type="button" mat-raised-button (click)="fileInput.click()"
+                                    style="border: 1px solid #f4b41a">Choose
+                                    File &nbsp;
+                                    <mat-icon>image</mat-icon>
+                                </button>
+                                <input hidden #fileInput type="file" accept="application/pdf"
+                                    (change)="onImageChange(i,$event,product.product_id,product.product_turnaround)">
+                            </div>
+                        </form>
+
                     </div>
                 </mat-expansion-panel>
             </mat-accordion>
@@ -99,6 +115,13 @@
                     </div>
                 </mat-expansion-panel>
             </mat-accordion>
+            <div class="row pt-3 justify-content-end">
+                <div class="col-md-4 ">
+                    <button (click)="place_order()" mat-raised-button class="btn" color="accent" class="btn-block">Place
+                        Order</button>
+                </div>
+
+            </div>
         </div>
         <div class="col-md-3">
             <div class="card">

@@ -42,7 +42,7 @@
                   <mat-label>Email</mat-label>
                   <input matInput formControlName="email" [(ngModel)]="user_data.email" required="required" type="email"
                     placeholder="Enter Last Name">
-                  <mat-icon matSuffix>envelope</mat-icon>
+                  <mat-icon matSuffix>email</mat-icon>
                   <mat-error *ngIf="email.touched && email.errors?.required">
                     Email is Required
                   </mat-error>

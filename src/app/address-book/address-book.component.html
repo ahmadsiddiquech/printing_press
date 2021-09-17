@@ -18,7 +18,14 @@
                         <div class="col-md-6 mb-3">
                             <div class="card" style="background-color: #a2a2a230;">
                                 <div class="card-body">
-                                    <b>Billing Address</b>
+                                    <div class="row justify-content-between">
+                                        <div class="pl-3">
+                                            <b>Billing Address</b>
+                                        </div>
+                                        <div class="pr-3">
+                                            <mat-icon>local_shipping</mat-icon>
+                                        </div>
+                                    </div>
                                     <address *ngIf="billing_address">
                                         {{billing_address.contact_name}}<br>
                                         {{billing_address.company_name}}<br>
@@ -32,7 +39,15 @@
                         <div class="col-md-6">
                             <div class="card" style="background-color: #a2a2a230;">
                                 <div class="card-body">
-                                    <b>Delivery Address</b>
+                                    <div class="row justify-content-between">
+                                        <div class="pl-3">
+                                            <b>Delivery Address</b>
+                                        </div>
+                                        <div class="pr-3">
+                                            <mat-icon>attach_money</mat-icon>
+                                        </div>
+                                    </div>
+
                                     <address *ngIf="delivery_address">
                                         {{delivery_address.contact_name}}<br>
                                         {{delivery_address.company_name}}<br>
@@ -75,9 +90,8 @@
                                         </div>
                                         <div class="mr-3">
                                             <a href="javascript:void(0);" (click)="delete_address(p.id)">
-                                                <mat-icon>delete_outline</mat-icon>
+                                                <mat-icon style="color:rgb(173, 29, 29)">delete_outline</mat-icon>
                                             </a>
-
                                         </div>
                                     </div>
                                     <div class="mt-1">

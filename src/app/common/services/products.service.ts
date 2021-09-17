@@ -141,11 +141,14 @@ export class ProductsService {
     let cart: any;
     cart = localStorage.getItem('cart');
     cart = JSON.parse(cart);
-    if (cart.length > 0) {
-      this._cartQty.next(cart.length)
-    } else {
-      this._cartQty.next(0)
+    if (cart) {
+      if (cart.length > 0) {
+        this._cartQty.next(cart.length)
+      } else {
+        this._cartQty.next(0)
+      }
     }
+
     return this._cartQty.asObservable();
   }
 

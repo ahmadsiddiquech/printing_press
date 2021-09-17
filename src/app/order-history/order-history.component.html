@@ -5,30 +5,38 @@
         </div>
         <div class="col-md-9">
             <mat-accordion class="example-headers-align">
-                <mat-expansion-panel hideToggle *ngFor="let p of orderDetail ;let i=index ">
+                <mat-expansion-panel *ngFor="let p of orders ;let i=index ">
                     <mat-expansion-panel-header>
                         <mat-panel-title>
-                            Ref: {{p.ref}} || {{p.condition}}
-
+                            <b>Order ID: {{p.id}} | Status: {{p.order_status}} | Date : {{p.order_date}}</b>
                         </mat-panel-title>
-                        <span style="text-align: end;">
-                            <mat-icon>expand_more</mat-icon>
-                        </span>
                     </mat-expansion-panel-header>
 
                     <div class="row">
-                        <div class="col-4">
-                            <img mat-card-image src="{{p.img}}" alt="Photo of a Shiba Inu">
+                        <div class="col-12">
+                            <mat-label> <b>Total Price : £ {{p.total_price}}</b></mat-label>
                         </div>
-                        <div class="col-8">
-                            <mat-label> <b> {{p.size}} {{p.type }}</b></mat-label>
-                            <p> hellow world</p>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <mat-label> <b>Delivery Address</b></mat-label><br>
+                            <mat-label>{{ p.d_contact_name }} , {{ p.d_company_name }} </mat-label><br>
+                            <mat-label>{{ p.d_address }} , {{ p.d_postcode }} </mat-label><br>
+                            <mat-label>{{ p.d_state }} , {{ p.d_country }} </mat-label><br>
+                            <mat-label>{{ p.d_phone }}</mat-label>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-label> <b>Billing Address</b></mat-label><br>
+                            <mat-label>{{ p.contact_name }} , {{ p.company_name }} </mat-label><br>
+                            <mat-label>{{ p.address }} , {{ p.postcode }} </mat-label><br>
+                            <mat-label>{{ p.state }} , {{ p.country }} </mat-label><br>
+                            <mat-label>{{ p.phone }}</mat-label>
                         </div>
                     </div>
                     <hr>
                     <div class="d-flex justify-content-between">
-                        <button mat-raised-button color="accent">Download Invoice </button>
-                        <button mat-raised-button color="accent">Reload</button>
+                        <button mat-raised-button color="accent">Download Invoice</button>
+                        <button mat-raised-button color="accent">Reorder</button>
                     </div>
                 </mat-expansion-panel>
             </mat-accordion>
