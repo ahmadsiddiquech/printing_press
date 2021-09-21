@@ -134,9 +134,6 @@
                                     Product Info
                                 </th>
                                 <th>
-                                    VAT
-                                </th>
-                                <th>
                                     Price
                                 </th>
                             </thead>
@@ -144,20 +141,22 @@
                                 <tr *ngFor="let product of cart_products">
                                     <td>
                                         <b>{{ product.product_type }}</b><br>
-                                        {{ product.quantity }}, {{ product.finishing_size }}, {{ product.printed_pages
+                                        <!-- {{ product.quantity }}, {{ product.finishing_size }}, {{ product.printed_pages
                                         }}, {{
-                                        product.stock }}, {{ product.cover }}, {{ product.lamination }}
-                                    </td>
-                                    <td>
-                                        £{{ product.vat }}
+                                        product.stock }}, {{ product.cover }}, {{ product.lamination }} -->
                                     </td>
                                     <td>
                                         £{{ product.price }}
                                     </td>
                                 </tr>
+                                <tr style="border-top: 1px solid grey;">
+                                    <td><b>Delivery Fee</b></td>
+                                    <td>£ {{delivery_fee}}</td>
+                                </tr>
+
                                 <tr>
                                     <td><b>Total</b></td>
-                                    <td colspan="2" style="text-align: center;">£ {{total_price}}</td>
+                                    <td>£ {{total_price}}</td>
                                 </tr>
                             </tbody>
                         </table>

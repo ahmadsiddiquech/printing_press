@@ -17,8 +17,11 @@ import { ServiceService } from '../common/services/service.service';
 export class PlaceOrderComponent {
   cart: any;
   result: any;
-  total_price = 0;
+  items_price: any = 0;
+  delivery_fee: any = 5;
+  total_price: any = 0;
   cart_products: any = [];
+  delivery: any;
   user_id: any;
   loggedIn: any;
   user_data: any;
@@ -36,6 +39,7 @@ export class PlaceOrderComponent {
     });
     if (this.loggedIn) {
       this.user_id = localStorage.getItem("user_id");
+      this.delivery = localStorage.getItem("delivery");
       this.cart = localStorage.getItem('cart');
       this.cart = JSON.parse(this.cart);
       for (let i = 0; i < this.cart.length; i++) {
@@ -45,13 +49,23 @@ export class PlaceOrderComponent {
               this.result = response;
               if (this.result.success) {
                 this.result.data[0].product_turnaround = this.cart[i].product_turnaround;
+                this.result.data[0].price = Math.round(Number(this.result.data[0].price) + (Number(this.result.data[0].price) * (Number(this.result.data[0].vat) / 100)));
                 this.cart_products.push(this.result.data[0]);
+                this.items_price = this.items_price + Number(this.result.data[0].price);
                 this.total_price = this.total_price + Number(this.result.data[0].price);
+
               } else {
                 this.cart_products = [{ id: 0, name: 'No Record Found' }];
               }
             }
           )
+      }
+      if (this.delivery == "Standard") {
+        this.total_price = Math.round(this.items_price + this.delivery_fee);
+      } else if (this.delivery == "Next Day") {
+        this.delivery_fee = 0;
+        this.total_price = Math.round(this.items_price);
+
       }
       this.addressService.getAddress(this.user_id)
         .subscribe(
@@ -155,6 +169,9 @@ export class PlaceOrderComponent {
       "product_designs": this.selectedFile,
       "billing_address": this.billing_address,
       "delivery_address": this.delivery_address,
+      "delivery": this.delivery,
+      "items_price": this.items_price,
+      "delivery_fee": this.delivery_fee,
       "total_price": this.total_price
     };
     this.order.addOrder(data).subscribe(
@@ -162,6 +179,7 @@ export class PlaceOrderComponent {
         this.result = response;
         if (this.result.success) {
           localStorage.removeItem('cart');
+          localStorage.removeItem('delivery');
           this.productService.setCartQty(0);
           this.router.navigateByUrl("/my-order-history");
         } else {

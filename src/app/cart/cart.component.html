@@ -54,15 +54,16 @@
                     <h1 class="card-title">Order Summary</h1>
                     <div class="d-flex justify-content-between">
                         <h4>Items ({{total_items}})</h4>
-                        <h4>£ {{total_price}}</h4>
+                        <h4>£ {{items_price}}</h4>
                     </div>
                     <hr>
                     <mat-label>SHIPPING</mat-label>
                     <mat-form-field appearance="fill">
                         <mat-label>Choose an option</mat-label>
-                        <mat-select>
-                            <mat-option value="Standard">Standard Delivery</mat-option>
-                            <mat-option value="Next Day">Next Day Delivery</mat-option>
+                        <mat-select #delivery_fee (selectionChange)='add_delivery_fee(delivery_fee.value)'
+                            value="Standard">
+                            <mat-option value="Standard">Standard Delivery (£ 5.0)</mat-option>
+                            <mat-option value="Next Day">Next Day Delivery (£ 0.0)</mat-option>
                         </mat-select>
                     </mat-form-field>
                     <hr>
