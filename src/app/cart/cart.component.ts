@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ProductsService } from '../common/services/products.service';
 
 @Component({
@@ -15,7 +16,7 @@ export class CartComponent {
   total_price: any = 0;
 
   cart_products: any = [];
-  constructor(private productService: ProductsService) {
+  constructor(private productService: ProductsService, private router: Router) {
     localStorage.setItem('delivery', "Standard");
     this.get_cart_items();
   }
@@ -37,7 +38,7 @@ export class CartComponent {
                 this.cart_products.push(this.result.data[0]);
                 this.items_price += Math.fround(this.result.data[0].total_price);
                 this.items_price = Math.round(this.items_price);
-                this.total_price = Math.round(this.items_price + this.delivery_fee);
+                this.total_price = this.items_price;
               } else {
                 this.cart_products = [{ id: 0, name: 'No Record Found' }];
               }
@@ -50,11 +51,12 @@ export class CartComponent {
 
   add_delivery_fee(delivery_fee: any) {
     if (delivery_fee == "Standard") {
-      this.total_price = Math.round(this.items_price + this.delivery_fee);
+      this.total_price = Math.round(this.items_price);
       localStorage.setItem('delivery', "Standard");
     } else if (delivery_fee == "Next Day") {
       localStorage.setItem('delivery', "Next Day");
-      this.total_price = Math.round(this.items_price);
+      this.total_price = Math.round(this.items_price + this.delivery_fee);
+
     }
   }
 
@@ -67,5 +69,16 @@ export class CartComponent {
     const temp = localStorage.setItem("cart", JSON.stringify(this.cart));
     this.productService.setCartQty(this.cart.length);
     this.get_cart_items();
+  }
+
+  edit_product(product_id: any, index: any) {
+    this.cart = localStorage.getItem('cart');
+    this.cart = JSON.parse(this.cart);
+    this.cart.splice(index, 1);
+
+    localStorage.removeItem('cart');
+    const temp = localStorage.setItem("cart", JSON.stringify(this.cart));
+    this.productService.setCartQty(this.cart.length);
+    this.router.navigateByUrl("/flyer-printing/" + product_id);
   }
 }

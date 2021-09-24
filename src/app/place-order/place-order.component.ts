@@ -152,6 +152,7 @@ export class PlaceOrderComponent {
         event.target.files[0].product_id = product_id;
         event.target.files[0].product_turnaround = product_turnaround;
         this.selectedFile.splice(index, 1, event.target.files[0]);
+        // this.selectedFile = event.target.files[0];
       } else {
         this.snackBar.open('Upload File Less than 5 MB', 'Okay', {
           duration: 5 * 1000,
@@ -160,13 +161,18 @@ export class PlaceOrderComponent {
     }
   }
 
+  same_billing(event: any) {
+    if (event.checked) {
+      this.billing_address = this.delivery_address;
+    } else {
+      this.billing_address = 0;
+    }
+  }
+
   place_order() {
-    const formdata = new FormData();
-    formdata.append('image', this.selectedFile);
     var data = {
       "user_id": this.user_id,
       "order_products": this.cart,
-      "product_designs": this.selectedFile,
       "billing_address": this.billing_address,
       "delivery_address": this.delivery_address,
       "delivery": this.delivery,
@@ -178,6 +184,21 @@ export class PlaceOrderComponent {
       response => {
         this.result = response;
         if (this.result.success) {
+          for (let index = 0; index < this.selectedFile.length; index++) {
+
+            const element = this.selectedFile[index];
+            var data = {
+              'product_id': this.selectedFile[index].product_id,
+              'product_turnaround': this.selectedFile[index].product_turnaround
+            }
+            const formdata = new FormData();
+            console.log(element);
+            console.log(this.result.data.id);
+            formdata.append('design', element);
+            this.order.addOrderDesigns(this.result.data.id, formdata, data).subscribe(
+              response => {
+              })
+          }
           localStorage.removeItem('cart');
           localStorage.removeItem('delivery');
           this.productService.setCartQty(0);

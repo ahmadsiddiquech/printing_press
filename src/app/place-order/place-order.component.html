@@ -2,77 +2,8 @@
     <div class="row">
         <div class="col-md-9">
             <mat-accordion>
+
                 <mat-expansion-panel expanded>
-                    <mat-expansion-panel-header>
-                        <h1 class="pt-3">
-                            Delivery Address
-                        </h1>
-
-                    </mat-expansion-panel-header>
-                    <div class="row">
-                        <div *ngFor="let p of addresses ;let i=index " class="col-md-6 col-lg-4">
-                            <div class="card mb-3 my-card" [ngClass]="{'checked':p.id === delivery_address}"
-                                (click)="set_delivery_address(p.id)">
-                                <div class="card-body">
-                                    <div class="row justify-content-between">
-                                        <div class="pl-3">
-                                            <b>{{p.contact_name}}</b><br>
-                                            {{p.company_name}}
-                                        </div>
-                                        <div class="pr-3">
-                                            <mat-icon [ngClass]="{'checked1':p.id === delivery_address}">local_shipping
-                                            </mat-icon>
-                                        </div>
-                                    </div>
-                                    <div class="mt-1">
-                                        <p>
-                                            {{p.address}},{{p.state}},{{p.postcode}},{{p.country}}
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </mat-expansion-panel>
-            </mat-accordion>
-
-            <mat-accordion>
-                <mat-expansion-panel class="mt-3">
-                    <mat-expansion-panel-header>
-                        <h1 class="pt-3">
-                            Billing Address
-                        </h1>
-
-                    </mat-expansion-panel-header>
-                    <div class="row">
-                        <div *ngFor="let p of addresses ;let i=index " class="col-md-6 col-lg-4">
-                            <div class="card mb-3 my-card" [ngClass]="{'checked':p.id === billing_address}"
-                                (click)="set_billing_address(p.id)">
-                                <div class="card-body">
-                                    <div class="row justify-content-between">
-                                        <div class="pl-3">
-                                            <b>{{p.contact_name}}</b><br>
-                                            {{p.company_name}}
-                                        </div>
-                                        <div class="pr-3">
-                                            <mat-icon [ngClass]="{'checked1':p.id === billing_address}">attach_money
-                                            </mat-icon>
-                                        </div>
-                                    </div>
-                                    <div class="mt-1">
-                                        <p>
-                                            {{p.address}},{{p.state}},{{p.postcode}},{{p.country}}
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </mat-expansion-panel>
-            </mat-accordion>
-
-            <mat-accordion>
-                <mat-expansion-panel class="mt-3">
                     <mat-expansion-panel-header>
                         <h1 class="pt-3">
                             Design Files
@@ -100,9 +31,67 @@
 
                     </div>
                 </mat-expansion-panel>
-            </mat-accordion>
+                <mat-expansion-panel class="mt-3">
+                    <mat-expansion-panel-header>
+                        <h1 class="pt-3">
+                            Addresses
+                        </h1>
+                    </mat-expansion-panel-header>
+                    <h1>Delivery Address</h1>
+                    <div class="row">
+                        <div *ngFor="let p of addresses ;let i=index " class="col-md-6 col-lg-4">
+                            <div class="card mb-3 my-card" [ngClass]="{'checked':p.id === delivery_address}"
+                                (click)="set_delivery_address(p.id)">
+                                <div class="card-body">
+                                    <div class="row justify-content-between">
+                                        <div class="pl-3">
+                                            <b>{{p.contact_name}}</b><br>
+                                            {{p.company_name}}
+                                        </div>
+                                        <div class="pr-3">
+                                            <mat-icon [ngClass]="{'checked1':p.id === delivery_address}">local_shipping
+                                            </mat-icon>
+                                        </div>
+                                    </div>
+                                    <div class="mt-1">
+                                        <p>
+                                            {{p.address}},{{p.state}},{{p.postcode}},{{p.country}}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <h1>Billing Address</h1>
+                    <mat-checkbox (change)="same_billing($event)"> Same as Delivery Address </mat-checkbox>
+                    <div class="row">
+                        <div *ngFor="let p of addresses ;let i=index " class="col-md-6 col-lg-4">
+                            <div class="card mb-3 my-card" [ngClass]="{'checked':p.id === billing_address}"
+                                (click)="set_billing_address(p.id)">
+                                <div class="card-body">
+                                    <div class="row justify-content-between">
+                                        <div class="pl-3">
+                                            <b>{{p.contact_name}}</b><br>
+                                            {{p.company_name}}
+                                        </div>
+                                        <div class="pr-3">
+                                            <mat-icon [ngClass]="{'checked1':p.id === billing_address}">attach_money
+                                            </mat-icon>
+                                        </div>
+                                    </div>
+                                    <div class="mt-1">
+                                        <p>
+                                            {{p.address}},{{p.state}},{{p.postcode}},{{p.country}}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-            <mat-accordion>
+                </mat-expansion-panel>
+
                 <mat-expansion-panel class="mt-3">
                     <mat-expansion-panel-header>
                         <h1 class="pt-3">

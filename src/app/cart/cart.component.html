@@ -41,6 +41,9 @@
                                         {{ product.total_price }}
                                     </td>
                                     <td>
+                                        <button class="btn btn-sm" (click)="edit_product(product.p_id,i)">
+                                            <mat-icon>edit</mat-icon>
+                                        </button>
                                         <button class="btn btn-sm" (click)="delete_product(i)">
                                             <mat-icon>delete</mat-icon>
                                         </button>
@@ -62,8 +65,8 @@
                         <mat-label>Choose an option</mat-label>
                         <mat-select #delivery_fee (selectionChange)='add_delivery_fee(delivery_fee.value)'
                             value="Standard">
-                            <mat-option value="Standard">Standard Delivery (£ 5.0)</mat-option>
-                            <mat-option value="Next Day">Next Day Delivery (£ 0.0)</mat-option>
+                            <mat-option value="Standard">Standard Delivery (£ 0.0)</mat-option>
+                            <mat-option value="Next Day">Next Day Delivery (£ 5.0)</mat-option>
                         </mat-select>
                     </mat-form-field>
                     <hr>
