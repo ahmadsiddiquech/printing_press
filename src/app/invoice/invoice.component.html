@@ -1,0 +1,91 @@
+<div id="printable">
+    <div class="section-gap container" *ngIf="orders">
+        <h1 class="text-center pb-3">Invoice Printing Shop</h1>
+
+        <div class="d-flex justify-content-between">
+            <p><b>Invoice Number : </b>{{orders.id}}</p>
+            <p><b>Order Date : </b>{{orders.order_date}}</p>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row justify-content-between">
+                            <div class="pl-3">
+                                <b>Billing Address</b>
+                            </div>
+                        </div>
+                        <address>
+                            {{orders.contact_name}}<br>
+                            {{orders.company_name}}<br>
+                            {{orders.address}}<br>
+                            {{orders.state}},<br>
+                            {{orders.postcode}},{{orders.country}}
+                        </address>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row justify-content-between">
+                            <div class="pl-3">
+                                <b>Delivery Address</b>
+                            </div>
+                        </div>
+
+                        <address>
+                            {{orders.contact_name}}<br>
+                            {{orders.company_name}}<br>
+                            {{orders.address}},<br>
+                            {{orders.state}},<br>
+                            {{orders.postcode}},{{orders.country}}
+                        </address>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="table-responsive">
+            <table class="table table-borderless">
+                <thead>
+                    <th>
+                        Product Info
+                    </th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let product of orders.products;let i = index">
+                        <td>
+                            <b>{{ product.product_type }}</b><br>
+                            {{ product.quantity }}, {{ product.finishing_size }}, {{ product.printed_pages
+                            }},
+                            {{
+                            product.stock }}, {{ product.cover }}, {{ product.lamination }}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <hr>
+        <div class="d-flex justify-content-end">
+            <h4><b>Products Price : </b>
+                £ {{orders.items_price}}</h4>
+        </div>
+        <div class="d-flex justify-content-end">
+            <h4><b>Delivery Fee: </b>
+                £ {{orders.delivery_fee}}</h4>
+        </div>
+        <div class="d-flex justify-content-end">
+            <h4><b>Total Price : </b>
+                £ {{orders.total_price}}</h4>
+        </div>
+        <hr>
+        <p class="text-center"><b>Registered in UK</b><br>
+            Call : 123456789, &nbsp; Fax : 123456789 <br>
+            Barking London</p>
+    </div>
+</div>
+<div class="section-gap container">
+    <button mat-raised-button color="accent" (click)="printComponent('printable')">Print Invoice</button>
+</div>

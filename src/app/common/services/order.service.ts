@@ -17,6 +17,10 @@ export class OrderService {
     return this.http.get(this.orderUrl + '/' + user_id);
   }
 
+  getOrdersbyOrderId(order_id: any, user_id: any) {
+    return this.http.get(this.orderUrl + '/order_by_order_id/' + order_id + '/?user_id=' + user_id);
+  }
+
   addOrder(order: any) {
     return this.http.post(this.orderUrl, order);
   }

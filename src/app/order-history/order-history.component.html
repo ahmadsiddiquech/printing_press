@@ -14,7 +14,8 @@
 
                     <div class="row">
                         <div class="col-12">
-                            <mat-label> <b>Total Price : £ {{p.total_price}}</b></mat-label>
+                            <mat-label> <b>Price : £ {{p.items_price}} | Delivery Fee : £ {{p.delivery_fee}}
+                                    | Total Price : £ {{p.total_price}}</b></mat-label>
                         </div>
                     </div>
                     <div class="row">
@@ -35,8 +36,7 @@
                     </div>
                     <hr>
                     <div class="d-flex justify-content-between">
-                        <button mat-raised-button color="accent">View Invoice</button>
-                        <button mat-raised-button color="accent">Download Invoice</button>
+                        <a mat-raised-button color="accent" routerLink="/invoice/{{ p.id }}">View Invoice</a>
                     </div>
                 </mat-expansion-panel>
             </mat-accordion>

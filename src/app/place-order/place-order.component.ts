@@ -192,8 +192,6 @@ export class PlaceOrderComponent {
               'product_turnaround': this.selectedFile[index].product_turnaround
             }
             const formdata = new FormData();
-            console.log(element);
-            console.log(this.result.data.id);
             formdata.append('design', element);
             this.order.addOrderDesigns(this.result.data.id, formdata, data).subscribe(
               response => {

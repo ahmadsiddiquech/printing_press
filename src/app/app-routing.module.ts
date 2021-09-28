@@ -8,6 +8,7 @@ import { FlyerPrintingComponent } from './flyer-printing/flyer-printing.componen
 import { FlyersComponent } from './flyers/flyers.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { HomeComponent } from './home/home.component';
+import { InvoiceComponent } from './invoice/invoice.component';
 import { LoginComponent } from './login/login.component';
 import { OrderHistoryComponent } from './order-history/order-history.component';
 import { PlaceOrderComponent } from './place-order/place-order.component';
@@ -29,6 +30,7 @@ const routes: Routes = [
   { path: 'place-order', component: PlaceOrderComponent },
   { path: 'my-address-book', component: AddressBookComponent },
   { path: 'my-order-history', component: OrderHistoryComponent },
+  { path: 'invoice/:id', component: InvoiceComponent },
 ];
 
 @NgModule({

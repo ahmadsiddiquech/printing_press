@@ -40,6 +40,7 @@ import { AddressBookComponent } from './address-book/address-book.component';
 import { OrderHistoryComponent } from './order-history/order-history.component';
 import { ProductsService } from './common/services/products.service';
 import { AccountSidenavComponent } from './account-sidenav/account-sidenav.component';
+import { InvoiceComponent } from './invoice/invoice.component';
 
 
 @NgModule({
@@ -60,7 +61,8 @@ import { AccountSidenavComponent } from './account-sidenav/account-sidenav.compo
     PlaceOrderComponent,
     AddressBookComponent,
     OrderHistoryComponent,
-    AccountSidenavComponent
+    AccountSidenavComponent,
+    InvoiceComponent
   ],
   imports: [
     BrowserModule,
