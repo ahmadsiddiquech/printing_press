@@ -1,5 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  api_base_url: `https://printingpressapi.herokuapp.com/`,
 };
-
-export const api_base_url = 'http://localhost:3000/';

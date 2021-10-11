@@ -4,9 +4,9 @@
 
 export const environment = {
   production: false,
+  api_base_url: `http://localhost:3000/`,
 };
 
-export const api_base_url = 'http://localhost:3000/';
 
 /*
  * For easier debugging in development mode, you can import the following file
