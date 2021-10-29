@@ -50,7 +50,6 @@ export class LoginComponent {
           response => {
             this.data = response;
             if (this.data.success === true) {
-
               this.auth.setLoggedIn(this.data.token, this.data.data);
               this.router.navigateByUrl('/account');
             } else {

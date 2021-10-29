@@ -16,6 +16,7 @@ export class AccountComponent implements OnInit {
   user_data: any;
   result: any;
   user_id: any;
+  token: any;
   loggedIn: any;
   myFile: any;
   selectedFile: any;
@@ -26,9 +27,10 @@ export class AccountComponent implements OnInit {
       this.loggedIn = response;
     });
     if (this.loggedIn) {
+      this.token = localStorage.getItem("token");
       this.user_id = localStorage.getItem("user_id");
 
-      this.service.getUser(this.user_id).subscribe(response => {
+      this.service.getUser(this.user_id, this.token).subscribe(response => {
         this.result = response;
         if (this.result.success) {
           this.user_data = this.result.data;

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -14,8 +14,8 @@ export class ServiceService {
     return this.http.get(this.usersUrl);
   }
 
-  getUser(id: any) {
-    return this.http.get(this.usersUrl + '/' + id);
+  getUser(id: any, token: any) {
+    return this.http.get(this.usersUrl + '/' + id + '/?token=' + token);
   }
 
   resgisterAdmin(user: any) {
